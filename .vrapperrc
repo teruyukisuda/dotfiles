@@ -1,0 +1,75 @@
+"set ignorecase
+"set smartcase
+set clipboard=unnamed
+
+set hlsearch
+
+"インクリメンタルサーチを行う
+"使い物にならない
+"set incsearch
+
+nnoremap mj :AddJavaDocComment<CR>
+nnoremap mi :OrganizeImports<CR>
+
+"srで参照をプロジェクトから検索
+noremap sr :SearchRef<CR>
+
+"スクロール
+noremap <Space>j <C-f>
+noremap <Space>k <C-b>
+
+"カーソル位置の単語をyankする
+nnoremap vv vawy
+
+"最後に変更されたテキストを選択する
+nnoremap gc  `[v`]
+vnoremap gc ;<C-u>normal gc<Enter>
+onoremap gc ;<C-u>normal gc<Enter>
+
+"<space>j, <space>kで画面送り
+noremap <Space>j <C-f>
+noremap <Space>k <C-b>
+
+"最後に編集された位置に移動
+nnoremap gb :GoLastEditPosition<CR>
+
+"次のメンバ(フィールド,メソッド)
+nnoremap mm :GoNextMember<CR>
+nnoremap mp :GoPrevMember<CR>
+
+
+"<C-p>でyankレジスタをペーストする
+nnoremap <C-p> <S-2>0p
+
+inoremap <C-o> <Esc>o
+inoremap <C-h> <BS>
+inoremap <C-a> <Esc>0i
+inoremap <C-e> <Esc>:LineEnd<CR>a
+inoremap <C-f> <Esc><Right>a
+inoremap <C-b> <Esc>i
+inoremap <C-d> <Esc><Right>xi
+inoremap <C-k> <Esc><Right>d$a
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
+
+vnoremap = :Format<CR>
+
+" ref
+" http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/texteditor/IWorkbenchActionDefinitionIds.html
+" http://help.eclipse.org/help33/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/texteditor/ITextEditorActionDefinitionIds.html
+" http://help.eclipse.org/ganymede/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/ui/actions/IJavaEditorActionDefinitionIds.html
+
+eclipseaction SearchRef  org.eclipse.jdt.ui.edit.text.java.search.references.in.project
+eclipseaction GoLastEditPosition org.eclipse.ui.edit.text.gotoLastEditPosition
+eclipseaction GoNextMember org.eclipse.jdt.ui.edit.text.java.goto.next.member
+eclipseaction GoPrevMember org.eclipse.jdt.ui.edit.text.java.goto.previous.member
+
+"Action definition ID of the source -> add block comment action 
+eclipseaction AddBlockComment org.eclipse.jdt.ui.edit.text.java.add.block.comment
+
+"Action definition ID of the source -> add import action 
+eclipseaction AddImport org.eclipse.jdt.ui.edit.text.java.add.import
+
+"Add JavaDoc
+eclipseaction AddJavaDocComment org.eclipse.jdt.ui.edit.text.java.add.javadoc.comment
+
