@@ -55,8 +55,8 @@ set smarttab
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m,%f
 set grepprg=grep\ -nh
 
-set guifont=Ricty\ Discord:h15
-set guifontwide=Ricty\ Discord:h15
+set guifont=Ricty:h13
+set guifontwide=Ricty:h13
 
 "タブ幅の設定
 set tabstop=4

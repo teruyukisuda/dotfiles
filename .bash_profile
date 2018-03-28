@@ -25,6 +25,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 
 # .bashrc を読み込む
 test -r ~/.bashrc && . ~/.bashrc
