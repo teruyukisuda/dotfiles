@@ -1,5 +1,5 @@
 syntax on
-colorscheme molokai
+colorscheme badwolf
 "set t_Co=256
 set term=xterm-256color
 "highlight Normal ctermbg=none
@@ -55,8 +55,8 @@ set smarttab
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m,%f
 set grepprg=grep\ -nh
 
-set guifont=Ricty\ Discord:h16
-set guifontwide=Ricty\ Discord:h16
+set guifont=Ricty\ Discord:h15
+set guifontwide=Ricty\ Discord:h15
 
 "タブ幅の設定
 set tabstop=4
