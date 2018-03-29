@@ -34,9 +34,6 @@ alias hidedot='~/Documents/myTools/hidedot.sh'
 #KobitoDBのファイルをDropBoxにバックアップする
 alias kobitoCp='~/Documents/myTools/kobitoCp.sh'
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/teru1/.gvm/bin/gvm-init.sh" ]] && source "/Users/teru1/.gvm/bin/gvm-init.sh"
-
 #tmuxの自動起動
 #if [ -z "$PS1" ]; then return ; fi
 
