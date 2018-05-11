@@ -1,4 +1,4 @@
-export M2_HOME=/Applications/maven
+#export M2_HOME=/Applications/maven
 #export SVN_EDITOR=/usr/local/bin/vim
 #export CATALINA_HOME=/Applications/eclipse3.6_64bit/workspace3.6/apache-tomcat-7.0.23-src/output/build
 #export CATALINA_HOME=/Applications/tomcat
@@ -14,11 +14,12 @@ export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Command
 export PGDATA=/usr/local/var/postgres
 #
 
-PATH="$PATH:/usr/local/bin"
+# /etc/profileのpath helperで設定されるようなのでいらないかもしれない
+#PATH="$PATH:/usr/local/bin"
 
 PATH="$PATH:/usr/local/sbin"
 
-PATH=$PATH:$M2_HOME/bin
+# PATH=$PATH:$M2_HOME/bin
 
 PATH=${PATH}:${JAVA_HOME}/bin
 
@@ -29,6 +30,8 @@ PATH=$PATH:$HOME/.nodebrew/current/bin
 PATH="$PATH:/Applications/MacVim.app/Contents/bin"
 
 export PATH
+
+export NODE_PATH=/Users/teru1/.nodebrew/node/v6.11.1/lib/node_modules
 
 # .bashrc を読み込む
 test -r ~/.bashrc && . ~/.bashrc

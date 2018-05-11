@@ -153,6 +153,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'mattn/emmet-vim'
 
+" table-mode
+NeoBundle 'dhruvasagar/vim-table-mode'
+" table-modeのコーナーを|にしてmarkdown対応にする
+let g:table_mode_corner = '|'
+
 " コード補完
 NeoBundle 'Shougo/neocomplete.vim'
 " NeoBundle 'marcus/rsense'
