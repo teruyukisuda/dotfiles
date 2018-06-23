@@ -80,7 +80,8 @@ nnoremap <Space>h  ^
 nnoremap <Space>l  $
 
 "ノーマルモードでF9にNerdのショートカット割り当て
-nnoremap <F9> :NERDTreeToggle <CR>
+"nnoremap <F9> :NERDTreeToggle <CR>
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 "RedoはUにバインド
 nnoremap U :Redo<CR>
@@ -130,7 +131,8 @@ else
 endif
 
 "emmetキーバインド
-let g:user_emmet_leader_key='<C-y>'
+"let g:user_emmet_leader_key='<c-t>'
+let g:user_emmet_leader_key='<C-Z>'
 
 " leaderキーを,に変更
 let mapleader = ","
@@ -310,7 +312,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
@@ -356,28 +358,15 @@ function! HandleURI()
 	endif
 endfunction
 map <Leader>w :call HandleURI()<CR>
-"↑ URLが書いてある行で「\」「w」を続けて押すと、規定のブラウザでURLが開きます。
+"↑ URLが書いてある行で「,」「w」を続けて押すと、規定のブラウザでURLが開きます。
 
 
-"↓ Vimで現在開いているファイルのパスを取得する設定
+"↓
+"Vimで現在開いているファイルのパスを取得する設定(CopyPath,CopyFileName）のスクリプトは~/.vim/plugin内にある
 " ,cp
-" ,cfp
 " ,cf
-function! CopyPath()
-  echo expand('%:P')
-endfunction
-
-function! CopyFullPath()
-  echo expand('%:p')
-endfunction
-
-function! CopyFileName()
-  echo expand('%:t')
-endfunction
-
-nnoremap <silent>cp :call CopyPath()<CR>
-nnoremap <silent>cfp :call CopyFullPath()<CR>
-nnoremap <silent>cf :call CopyFileName()<CR>
+nnoremap <Leader>cp :CopyPath<CR>
+nnoremap <Leader>cf :CopyFileName<CR>
 "↑ Vimで現在開いているファイルのパスを取得する設定
 "
 " ↓ CtrlP用の設定
