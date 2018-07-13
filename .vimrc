@@ -1,5 +1,13 @@
 syntax on
 colorscheme badwolf
+
+
+" leaderキーを,に変更
+let mapleader = ","
+" ,のデフォルトの機能は、\で使えるように退避
+noremap \  ,
+
+
 "set t_Co=256
 set term=xterm-256color
 "highlight Normal ctermbg=none
@@ -134,10 +142,6 @@ endif
 "let g:user_emmet_leader_key='<c-t>'
 let g:user_emmet_leader_key='<C-Z>'
 
-" leaderキーを,に変更
-let mapleader = ","
-" ,のデフォルトの機能は、\で使えるように退避
-noremap \  ,
 
 
 "----------------------------------------------------
@@ -230,6 +234,9 @@ augroup PrevimSettings
 augroup END
 let g:previm_open_cmd = 'open -a Safari'
 " ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ markdownプレビュー
+
+
+nnoremap <Leader>b :!open -a Safari %<CR>
 
 " ファイル検索
 NeoBundle "ctrlpvim/ctrlp.vim"
