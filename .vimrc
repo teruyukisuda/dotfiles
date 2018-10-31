@@ -1,4 +1,57 @@
-syntax on
+"---------------------------------------------------
+" Start Dein Settings.
+"--------------------------------------------------
+"
+
+"----------------------------------------------------
+"" Start dein Settings.
+"----------------------------------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/Users/tsuda/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('/Users/tsuda/.cache/dein')
+  call dein#begin('/Users/tsuda/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/tsuda/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+" プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+   " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  " Add or remove your plugins here like this:
+  "call dein#add('airblade/vim-gitgutter')
+  "call dein#add('Shougo/neosnippet.vim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+"----------------------------------------------------
+"" end dein Settings.
+"----------------------------------------------------
+
+
 colorscheme badwolf
 
 
@@ -29,7 +82,6 @@ set autochdir
 
 "vi互換をオフする
 set nocompatible
-filetype plugin on
 
 "スワップファイル用のディレクトリを指定する
 set directory=$HOME/vimbackup
@@ -63,8 +115,8 @@ set smarttab
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m,%f
 set grepprg=grep\ -nh
 
-set guifont=Ricty:h13
-set guifontwide=Ricty:h13
+set guifont=Ricty:h14
+set guifontwide=Ricty:h14
 
 "タブ幅の設定
 set tabstop=4
@@ -262,7 +314,7 @@ NeoBundleCheck
 "--------------------------------------------------
 " End Neobundle Settings.
 "--------------------------------------------------
-
+"
 
 "--------------------------------------------------
 " Start Plug Settings.
