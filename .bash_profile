@@ -33,6 +33,21 @@ export PATH
 
 export NODE_PATH=/Users/teru1/.nodebrew/node/v6.11.1/lib/node_modules
 
+#export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+  __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)/share"
+  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+fi
+
+PROMPT_COMMAND='__git_ps1 "\u:\W" "\\\$ "'
+#GIT_PS1_SHOWDIRTYSTATE=true
+#GIT_PS1_SHOWSTASHSTATE=true
+GIT_PS1_SHOWUNTRACKEDFILES=true
+GIT_PS1_SHOWCOLORHINTS=true
+#GIT_PS1_HIDE_IF_PWD_IGNORED=true
+#GIT_PS1_SHOWUPSTREAM="auto"
+
 # .bashrc を読み込む
 test -r ~/.bashrc && . ~/.bashrc
 
