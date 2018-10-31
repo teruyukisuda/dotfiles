@@ -80,6 +80,14 @@ set cursorline
 set list
 set listchars=tab:>-,trail:-,eol:↲
 
+"選択行にあるコマンドを実行する
+vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
+nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
+
+"コマンドを実行する
+vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
+nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
+
 "検索結果のハイライトをEsc連打でクリアする
 nnoremap <ESC><ESC> :nohlsearch<CR>
 
@@ -396,8 +404,6 @@ endfunction
 map <Leader>w :call HandleURI()<CR>
 "↑ URLが書いてある行で「,」「w」を続けて押すと、規定のブラウザでURLが開きます。
 
-
-"↓
 "Vimで現在開いているファイルのパスを取得する設定(CopyPath,CopyFileName）のスクリプトは~/.vim/plugin内にある
 " ,cp
 " ,cf
