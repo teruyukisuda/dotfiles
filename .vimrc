@@ -461,6 +461,7 @@ map <Leader>w :call HandleURI()<CR>
 " ,cf
 nnoremap <Leader>cp :CopyPath<CR>
 nnoremap <Leader>cf :CopyFileName<CR>
+nnoremap <Leader>cu :echo expand("%:p")<CR>
 "↑ Vimで現在開いているファイルのパスを取得する設定
 "
 " ↓ CtrlP用の設定
