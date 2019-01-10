@@ -151,6 +151,12 @@ nnoremap <Space>l  $
 "nnoremap <F9> :NERDTreeToggle <CR>
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
+"html xmlの改行
+nnoremap <Leader>ff :%s/></>\r</g<CR>
+
+"全ページインデント
+nnoremap <Leader>ii :normal gg=G<CR>
+
 "RedoはUにバインド
 nnoremap U :Redo<CR>
 "Ctrl+pで0レジスタの値をペースト
