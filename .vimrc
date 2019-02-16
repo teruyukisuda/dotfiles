@@ -473,23 +473,61 @@ nnoremap <Leader>cu :echo expand("%:p")<CR>
 " ↓ CtrlP用の設定
 " http://qiita.com/oahiroaki/items/d71337fb9d28303a54a8
 " Prefix: s
-nnoremap s <Nop>
-nnoremap sa :<C-u>CtrlP<Space>
-nnoremap sb :<C-u>CtrlPBuffer<CR>
-nnoremap sd :<C-u>CtrlPDir<CR>
-nnoremap sf :<C-u>CtrlP<CR>
-nnoremap sl :<C-u>CtrlPLine<CR>
-nnoremap sm :<C-u>CtrlPMRUFiles<CR>
-nnoremap sq :<C-u>CtrlPQuickfix<CR>
-nnoremap ss :<C-u>CtrlPMixed<CR>
-nnoremap st :<C-u>CtrlPTag<CR>
+"nnoremap s <Nop>
+"nnoremap sa :<C-u>CtrlP<Space>
+"nnoremap sb :<C-u>CtrlPBuffer<CR>
+"nnoremap sd :<C-u>CtrlPDir<CR>
+"nnoremap sf :<C-u>CtrlP<CR>
+"nnoremap sl :<C-u>CtrlPLine<CR>
+"nnoremap sm :<C-u>CtrlPMRUFiles<CR>
+"nnoremap sq :<C-u>CtrlPQuickfix<CR>
+"nnoremap ss :<C-u>CtrlPMixed<CR>
+"nnoremap st :<C-u>CtrlPTag<CR>
 
-let g:ctrlp_map = '<Nop>'
-" Guess vcs root dir
-let g:ctrlp_working_path_mode = 'ra'
-" Open new file in current window
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_extensions = ['tag', 'quickfix', 'dir', 'line', 'mixed']
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
+"let g:ctrlp_map = '<Nop>'
+"" Guess vcs root dir
+"let g:ctrlp_working_path_mode = 'ra'
+"" Open new file in current window
+"let g:ctrlp_open_new_file = 'r'
+"let g:ctrlp_extensions = ['tag', 'quickfix', 'dir', 'line', 'mixed']
+"let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:18'
 " ↑ CtrlP用の設定
 "
+"
+
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap sH <C-w>H
+nnoremap sn gt
+nnoremap sp gT
+nnoremap sr <C-w>r
+nnoremap s= <C-w>=
+nnoremap sw <C-w>w
+nnoremap so <C-w>_<C-w>|
+nnoremap sO <C-w>=
+nnoremap sN :<C-u>bn<CR>
+nnoremap sP :<C-u>bp<CR>
+nnoremap st :<C-u>tabnew<CR>
+nnoremap sT :<C-u>Unite tab<CR>
+nnoremap ss :<C-u>sp<CR>
+nnoremap sv :<C-u>vs<CR>
+nnoremap sq :<C-u>q<CR>
+nnoremap sQ :<C-u>bd<CR>
+nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
+nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
+
+call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+call submode#map('bufmove', 'n', '', '<', '<C-w><')
+call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+
