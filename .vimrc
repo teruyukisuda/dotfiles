@@ -494,31 +494,30 @@ nnoremap <Leader>cu :echo expand("%:p")<CR>
 " ↑ CtrlP用の設定
 "
 "
-
+" ウインドウ操作
 nnoremap s <Nop>
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sH <C-w>H
-nnoremap sn gt
-nnoremap sp gT
-nnoremap sr <C-w>r
-nnoremap s= <C-w>=
-nnoremap sw <C-w>w
-nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>=
-nnoremap sN :<C-u>bn<CR>
-nnoremap sP :<C-u>bp<CR>
-nnoremap st :<C-u>tabnew<CR>
-nnoremap sT :<C-u>Unite tab<CR>
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
-nnoremap sq :<C-u>q<CR>
-nnoremap sQ :<C-u>bd<CR>
+nnoremap sj <C-w>j "下へフォーカス
+nnoremap sk <C-w>k "上にフォーカス
+nnoremap sl <C-w>l "右にフォーカス
+nnoremap sh <C-w>h "左にフォーカス
+nnoremap sJ <C-w>J "下へ移動
+nnoremap sK <C-w>K "上に移動
+nnoremap sL <C-w>L "右に移動
+nnoremap sH <C-w>H "左に移動
+nnoremap sn gt "次のタブへ
+nnoremap sp gT "前のタブへ
+nnoremap sr <C-w>r "回転
+nnoremap s= <C-w>= "全てのウインドウの幅と高さを同じにする
+nnoremap so <C-w>_<C-w>| "縦横最大化
+nnoremap sO <C-w>= "全てのウインドウの幅と高さを同じにする
+nnoremap sN :<C-u>bn<CR> "次のバッファ
+nnoremap sP :<C-u>bp<CR> "前のバッファ
+nnoremap st :<C-u>tabnew<CR> "新規タブ
+nnoremap sT :<C-u>Unite tab<CR> 
+nnoremap ss :<C-u>sp<CR> "水平分割
+nnoremap sv :<C-u>vs<CR> "垂直分割
+nnoremap sq :<C-u>q<CR> "ウインドウを閉じる
+nnoremap sQ :<C-u>bd<CR> "バッファ削除
 nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
 nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
 
