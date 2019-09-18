@@ -132,6 +132,9 @@ set cursorline
 set list
 set listchars=tab:>-,trail:-,eol:↲
 
+"現在の検索位置を表示
+set shortmess-=S
+
 "選択行にあるコマンドを実行する
 vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
 nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
@@ -159,8 +162,6 @@ nnoremap <Leader>ii :normal gg=G<CR>
 
 "RedoはUにバインド
 nnoremap U :Redo<CR>
-"Ctrl+pで0レジスタの値をペースト
-nnoremap <C-p> <S-">0p
 
 "バッファの移動
 nnoremap <silent> [b :bprevious<CR>
@@ -305,7 +306,7 @@ let g:previm_open_cmd = 'open -a Safari'
 nnoremap <Leader>b :!open -a Safari %<CR>
 
 " ファイル検索
-NeoBundle "ctrlpvim/ctrlp.vim"
+" NeoBundle "ctrlpvim/ctrlp.vim"
 
 call neobundle#end()
 
@@ -387,12 +388,12 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+"  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+"  " For no inserting <CR> key.
+"  "return pumvisible() ? "\<C-y>" : "\<CR>"
+"endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
