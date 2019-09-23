@@ -257,6 +257,10 @@ NeoBundle 'tpope/vim-obsession'
 " vimのセッションを保存する
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
+
+NeoBundle 'kana/vim-textobj-entire'
+
+NeoBundle 'kana/vim-textobj-user'
 """ unite.vim
 " 入力モードで開始する
 "let g:unite_enable_start_insert=1
