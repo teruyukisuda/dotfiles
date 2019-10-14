@@ -90,7 +90,7 @@ set directory=$HOME/vimbackup
 "set expandtab
 
 "変更中のファイルでも、保存しないで他のファイルを表示する
-set hidden
+"set hidden
 
 "インクリメンタルサーチを行う
 set incsearch

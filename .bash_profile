@@ -21,9 +21,6 @@ export PGDATA=/usr/local/var/postgres
 export CATALINA_HOME=/Applications/apache-tomcat-8.5.34
 export CATALINA_BASE=/Applications/apache-tomcat-8.5.34
 
-
-
-
 PATH=""
 
 PATH=/opt/X11/bin:${PATH}
@@ -63,8 +60,7 @@ PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
 
 export PATH
 export MANPATH
-
-#export PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+#
 
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)/share"
