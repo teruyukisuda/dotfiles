@@ -10,7 +10,6 @@ alias loglocal='less /private/var/log/p2netex/tomcat/p2net/app/System.out'
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
 
 #PATH export PATH=/Applications/MAMP/Library/bin:$PATH
-
 #Javaのバーション切り替え
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
 
@@ -102,14 +101,12 @@ GIT_PS1_HIDE_IF_PWD_IGNORED=true
 GIT_PS1_SHOWUPSTREAM="auto"
 
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-export PYENV_ROOT=~/.pyenv
-export PATH="PYENV_ROOT/bin:$PATH"
-
-#pyenvとpyenv-virtualenvで補完がきくようにする
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+#export PYENV_ROOT=~/.pyenv
+#export PATH="PYENV_ROOT/bin:$PATH"
+#
+##pyenvとpyenv-virtualenvで補完がきくようにする
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 echo "read zprofile"
 
