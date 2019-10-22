@@ -21,13 +21,17 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}%{✔%G%}"
 #RPROMPT='$(git_super_status)'
 PROMPT="$PROMPT"'$(git_super_status) > '
 
-autoload -U compinit; compinit
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
-                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
-                             /usr/local/git/bin
-
+#autoload -U compinit; compinit
+#zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+#                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
+#                             /usr/local/git/bin
+#
 if [ -e /usr/local/share/zsh-completions ]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
+	fpath=(/usr/local/share/zsh-completions $fpath)
 fi
+
+autoload -U compinit
+compinit -u
+
 
 echo "read zshrc"
