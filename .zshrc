@@ -1,5 +1,7 @@
 export PATH=/usr/local/bin:${PATH}
 
+export PATH=/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:${PATH}
+
 autoload -Uz colors
 colors
 #PROMPT="%{$fg[green]%}%m%(!.#.$) %{$reset_color%}"
