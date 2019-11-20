@@ -28,6 +28,7 @@ PROMPT="$PROMPT"'$(git_super_status) > '
 #                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
 #                             /usr/local/git/bin
 #
+#
 if [ -e /usr/local/share/zsh-completions ]; then
 	fpath=(/usr/local/share/zsh-completions $fpath)
 fi
@@ -35,5 +36,18 @@ fi
 autoload -U compinit
 compinit -u
 
+
+#compdef _blade blade 
+#function _blade {
+#  local -a cmds
+#  if (( CURRENT == 2 ));then
+#    cmds=('init' 'update' 'upgrade' 'commit')
+#    _describe -t commands "subcommand" cmds
+#  else
+#    _files
+#  fi
+#
+#  return 1;
+#}
 
 echo "read zshrc"

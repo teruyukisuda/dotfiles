@@ -55,7 +55,6 @@ PATH=/Users/tsuda/p2netex-traversal-console/bin:${PATH}
 PATH=/usr/local/bin:${PATH}
 PATH=/Users/tsuda/p2netex-builder/bin:${PATH}
 PATH=$HOME/.nodebrew/current/bin:${PATH}
-PATH=/usr/local/Cellar/macvim/HEAD-47f76cb/MacVim.app/Contents/bin:${PATH}
 PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
 
 export PATH
