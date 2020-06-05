@@ -70,8 +70,7 @@
 ##各オプションの内容
 ##git/git-prompt.sh at master · git/git に記されている各オプションの内容をまとめます。
 ##
-##GIT_PS1_SHOWDIRTYSTATE
-##空以外の値を設定にすることで有効になる。
+##GIT_PS1_SHOWDIRTYSTATE ##空以外の値を設定にすることで有効になる。
 ##unstaged な変更がある時に (*) を、 staged な変更がある時に (+) を、プロンプトのブランチ名の右に表示する。
 ##GIT_PS1_SHOWSTASHSTATE
 ##空以外の値を設定にすることで有効になる。
@@ -113,7 +112,8 @@
 ##if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 ##if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-echo "read bash_profile"
+. .bashrc
+#echo "read bash_profile"
 
 
 
