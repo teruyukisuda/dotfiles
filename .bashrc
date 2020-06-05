@@ -1,3 +1,4 @@
+alias cl='clear'
 alias doc='cd ~/Documents'
 alias code='cd ~/Documents/Code'
 alias pathc='pwd | pbcopy'
@@ -14,7 +15,8 @@ alias loglocal='less /private/var/log/p2netex/tomcat/p2net/app/System.out'
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 #Javaのバーション切り替え
-export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+#export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "11"`
 
 #PosgreSql環境変数PGDATAの設定
 export PGDATA=/usr/local/var/postgres
