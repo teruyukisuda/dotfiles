@@ -10,3 +10,9 @@ unlink ~/.vim/colors
 ln -sf ~/dotfiles/colors ~/.vim/colors
 unlink ~/.vim/indent
 ln -sf ~/dotfiles/indent ~/.vim/indent
+unlink ~/.vim/rc
+ln -sf ~/dotfiles/rc ~/.vim/rc
+unlink ~/.vim/plugin
+ln -sf ~/dotfiles/plugin ~/.vim/plugin
+unlink ~/.vim/autoload
+ln -sf ~/dotfiles/autoload ~/.vim/autoload
