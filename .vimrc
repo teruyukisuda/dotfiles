@@ -1,7 +1,6 @@
 "---------------------------------------------------
 " Start Dein Settings.
 "--------------------------------------------------
-"
 
 "----------------------------------------------------
 "" Start dein Settings.
@@ -52,7 +51,6 @@ endif
 "----------------------------------------------------
 
 
-colorscheme badwolf
 
 
 " leaderキーを,に変更
@@ -226,6 +224,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'mattn/emmet-vim'
 
+NeoBundle 'sjl/badwolf'
+
 " table-mode
 NeoBundle 'dhruvasagar/vim-table-mode'
 " table-modeのコーナーを|にしてmarkdown対応にする
@@ -261,6 +261,10 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'kana/vim-textobj-entire'
 
 NeoBundle 'kana/vim-textobj-user'
+
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'tpope/vim-fugitive'
+
 """ unite.vim
 " 入力モードで開始する
 "let g:unite_enable_start_insert=1
@@ -311,6 +315,14 @@ nnoremap <Leader>b :!open -a Safari %<CR>
 
 " ファイル検索
 " NeoBundle "ctrlpvim/ctrlp.vim"
+
+NeoBundle 'easymotion/vim-easymotion'
+
+map <leader>s <Plug>(easymotion-bd-f2)
+nmap <leader>s <Plug>(easymotion-overwin-f2)
+
+map <leader>l <Plug>(easymotion-bd-jk)
+nmap <leader>l <Plug>(easymotion-overwin-line)
 
 call neobundle#end()
 
@@ -534,4 +546,6 @@ call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+
+colorscheme badwolf
 
