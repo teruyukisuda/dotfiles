@@ -448,11 +448,11 @@ nnoremap <Leader>cu :echo expand("%:p")<CR>
 " ↑ CtrlP用の設定
 "
 "
-map <leader>s <Plug>(easymotion-bd-f2)
-nmap <leader>s <Plug>(easymotion-overwin-f2)
+"
+set easymotion
+nmap <leader>s <Plug>(easymotion-bd-f2)
 
-map <leader>l <Plug>(easymotion-bd-jk)
-nmap <leader>l <Plug>(easymotion-overwin-line)
+nmap <leader>l <Plug>(easymotion-bd-jk)
 
 " ウインドウ操作
 nnoremap s <Nop>
