@@ -19,7 +19,7 @@ alias loglocal='less /private/var/log/p2netex/tomcat/p2net/app/System.out'
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "11"`
 
 #PosgreSql環境変数PGDATAの設定
-export PGDATA=/usr/local/var/postgres
+export PGDATA=/var/lib/p2netex/postgresql/p2net/data
 export CATALINA_HOME=/Applications/apache-tomcat-8.5.34
 export CATALINA_BASE=/Applications/apache-tomcat-8.5.34
 
@@ -58,6 +58,8 @@ PATH=/usr/local/bin:${PATH}
 PATH=/Users/tsuda/p2netex-builder/bin:${PATH}
 PATH=$HOME/.nodebrew/current/bin:${PATH}
 PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
+PATH=/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:${PATH}
+PATH=/Users/tsuda/project/p2net/p2netex-application/bin:${PATH}
 
 export PATH
 export MANPATH
