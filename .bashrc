@@ -116,3 +116,4 @@ GIT_PS1_SHOWUPSTREAM="auto"
 
 echo "read bashrc"
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
