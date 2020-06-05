@@ -128,7 +128,7 @@ set softtabstop=4
 set cursorline
 
 set list
-"set listchars=tab:>-,trail:-,eol:↲
+set listchars=tab:>-,trail:-,eol:↲
 
 "現在の検索位置を表示
 set shortmess-=S
