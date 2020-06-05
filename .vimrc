@@ -130,7 +130,7 @@ set softtabstop=4
 set cursorline
 
 set list
-set listchars=tab:>-,trail:-,eol:↲
+"set listchars=tab:>-,trail:-,eol:↲
 
 "現在の検索位置を表示
 set shortmess-=S
@@ -261,6 +261,12 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'kana/vim-textobj-entire'
 
 NeoBundle 'kana/vim-textobj-user'
+
+NeoBundle 'rking/ag.vim'
+
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'airblade/vim-gitgutter'
+
 """ unite.vim
 " 入力モードで開始する
 "let g:unite_enable_start_insert=1
