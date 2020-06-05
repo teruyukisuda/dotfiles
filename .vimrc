@@ -12,6 +12,9 @@ endif
 " Required:
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
+" diffsplitを常に左右分割
+set diffopt=vertical
+
 " Required:
 if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
@@ -88,7 +91,7 @@ set directory=$HOME/vimbackup
 "set expandtab
 
 "変更中のファイルでも、保存しないで他のファイルを表示する
-"set hidden
+set hidden
 
 "インクリメンタルサーチを行う
 set incsearch
@@ -523,22 +526,22 @@ nnoremap sJ <C-w>J "下へ移動
 nnoremap sK <C-w>K "上に移動
 nnoremap sL <C-w>L "右に移動
 nnoremap sH <C-w>H "左に移動
-nnoremap sn gt "次のタブへ
-nnoremap sp gT "前のタブへ
+nnoremap sN gt "次のタブへ
+nnoremap sP gT "前のタブへ
 nnoremap sr <C-w>r "回転
 nnoremap s= <C-w>= "全てのウインドウの幅と高さを同じにする
 nnoremap so <C-w>_<C-w>| "縦横最大化
 nnoremap sO <C-w>= "全てのウインドウの幅と高さを同じにする
-nnoremap sN :<C-u>bn<CR> "次のバッファ
-nnoremap sP :<C-u>bp<CR> "前のバッファ
+nnoremap sn :<C-u>bn<CR> "次のバッファ
+nnoremap sp :<C-u>bp<CR> "前のバッファ
 nnoremap st :<C-u>tabnew<CR> "新規タブ
 nnoremap sT :<C-u>Unite tab<CR> 
 nnoremap ss :<C-u>sp<CR> "水平分割
 nnoremap sv :<C-u>vs<CR> "垂直分割
 nnoremap sq :<C-u>q<CR> "ウインドウを閉じる
 nnoremap sQ :<C-u>bd<CR> "バッファ削除
-nnoremap sb :<C-u>Unite buffer_tab -buffer-name=file<CR>
-nnoremap sB :<C-u>Unite buffer -buffer-name=file<CR>
+nnoremap sB :<C-u>Unite buffer_tab -buffer-name=file<CR>
+nnoremap sb :<C-u>Unite buffer -buffer-name=file<CR>
 
 
 colorscheme badwolf
