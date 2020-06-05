@@ -449,10 +449,21 @@ nnoremap <Leader>cu :echo expand("%:p")<CR>
 "
 "
 "
+"easymotion plugin
 set easymotion
 nmap <leader>s <Plug>(easymotion-bd-f2)
 
 nmap <leader>l <Plug>(easymotion-bd-jk)
+
+" multi cursors plugin
+set multiple-cursors
+map <C-n> <A-n>
+
+"ReplaceWithRegister
+set ReplaceWithRegister
+" _で発動. ダブルクォーテーションの中を置換したいなら _i"
+map _ gr
+
 
 " ウインドウ操作
 nnoremap s <Nop>
