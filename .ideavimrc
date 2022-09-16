@@ -3,6 +3,9 @@ let mapleader = ","
 " ,のデフォルトの機能は、\で使えるように退避
 noremap \  ,
 
+" plugin系の有効化
+set surround
+set multiple-cursors
 
 "set t_Co=256
 set term=xterm-256color

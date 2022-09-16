@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zprofile.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.pre.zsh"
 alias doc='cd ~/Documents'
 alias code='cd ~/Documents/Code'
 alias pathc='pwd | pbcopy'
@@ -110,5 +112,5 @@ GIT_PS1_SHOWUPSTREAM="auto"
 
 echo "read zprofile"
 
-
-
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zprofile.post.zsh" ]] && builtin source "$HOME/.fig/shell/zprofile.post.zsh"

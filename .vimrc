@@ -1,4 +1,4 @@
-"---------------------------------------------------
+"------------------------------------------------
 " Start Dein Settings.
 "--------------------------------------------------
 
@@ -88,7 +88,7 @@ set nocompatible
 set directory=$HOME/vimbackup
 
 "タブの代わりに空白文字を指定する
-"set expandtab
+set expandtab
 
 "変更中のファイルでも、保存しないで他のファイルを表示する
 set hidden
@@ -136,11 +136,10 @@ set listchars=tab:>-,trail:-,eol:↲
 "現在の検索位置を表示
 set shortmess-=S
 
-"選択行にあるコマンドを実行する
-vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
-nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
+nnoremap j gj
+nnoremap k gk
 
-"コマンドを実行する
+"選択行にあるコマンドを実行する
 vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
 nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
 
@@ -173,10 +172,18 @@ nnoremap <silent> ]B :blast<CR>
 nnoremap <Leader>0 :silent ! start "%"
 
 " insertモードから抜ける
-inoremap <C-j> <Esc>
+"inoremap <C-j> <Esc>
 inoremap <C-e> <Esc>A
 inoremap <C-a> <Esc>I
-vnoremap <C-j> <Esc>
+"vnoremap <C-j> <Esc>
+
+noremap <C-j> <esc>
+noremap! <C-j> <esc>
+
+"nmap <c-j> <esc>
+"imap <c-j> <esc>
+"vmap <c-j> <esc>
+"omap <c-j> <esc>
 
 " insertモードでインサート
 "inoremap <C-n> <Down>
@@ -198,12 +205,20 @@ nnoremap ]Q :<C-u>clast<CR>
 set backspace=indent,eol,start
 
 "tmux使ってもカーソルが挿入モードで変わるように設定
+"if exists('$TMUX')
+"    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"else
+"    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"endif
 if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    " 挿入モード時に非点滅の縦棒タイプのカーソル
+    let &t_SI .= "\e[6 q"
+    " ノーマルモード時に非点滅のブロックタイプのカーソル
+    let &t_EI .= "\e[2 q"
+    " 置換モード時に非点滅の下線タイプのカーソル
+    let &t_SR .= "\e[4 q"
 endif
 
 "emmetキーバインド
@@ -224,51 +239,51 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 "install
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'mattn/emmet-vim'
+"NeoBundle 'scrooloose/nerdtree'
+"NeoBundle 'mattn/emmet-vim'
 
-NeoBundle 'sjl/badwolf'
+"NeoBundle 'sjl/badwolf'
 
 " table-mode
-NeoBundle 'dhruvasagar/vim-table-mode'
+"NeoBundle 'dhruvasagar/vim-table-mode'
 " table-modeのコーナーを|にしてmarkdown対応にする
 let g:table_mode_corner = '|'
 
 " コード補完
-NeoBundle 'Shougo/neocomplete.vim'
+" NeoBundle 'Shougo/neocomplete.vim'
 " NeoBundle 'marcus/rsense'
 " NeoBundle 'supermomonga/neocomplete-rsense.vim'
 "
 " 静的解析
-NeoBundle 'scrooloose/syntastic'
+"NeoBundle 'scrooloose/syntastic'
 
 " ドキュメント参照
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'yuku-t/vim-ref-ri'
+"NeoBundle 'thinca/vim-ref'
+"NeoBundle 'yuku-t/vim-ref-ri'
 
 " メソッド定義元へのジャンプ
-NeoBundle 'szw/vim-tags'
+"NeoBundle 'szw/vim-tags'
 
 " 自動で閉じる
-NeoBundle 'tpope/vim-endwise'
+"NeoBundle 'tpope/vim-endwise'
 
-NeoBundle 'thinca/vim-quickrun'
-
-" vimのセッションを保存する
-NeoBundle 'tpope/vim-obsession'
+"NeoBundle 'thinca/vim-quickrun'
 
 " vimのセッションを保存する
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
+"NeoBundle 'tpope/vim-obsession'
 
-NeoBundle 'kana/vim-textobj-entire'
+" vimのセッションを保存する
+"NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'Shougo/neomru.vim'
 
-NeoBundle 'kana/vim-textobj-user'
+"NeoBundle 'kana/vim-textobj-entire'
 
-NeoBundle 'rking/ag.vim'
+"NeoBundle 'kana/vim-textobj-user'
 
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
+"NeoBundle 'rking/ag.vim'
+
+"NeoBundle 'tpope/vim-fugitive'
+"NeoBundle 'airblade/vim-gitgutter'
 
 """ unite.vim
 " 入力モードで開始する
@@ -296,17 +311,17 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 " ウインドウのリサイズ Ctrl + Yでリサイズモード
-NeoBundle 'simeji/winresizer'
+"NeoBundle 'simeji/winresizer'
 let g:winresizer_start_key = '<C-Y>'
 
 " ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ markdownプレビュー
 " （http://note103.hateblo.jp/entry/2014/02/11/005326)
 " （https://mba-hack.blogspot.jp/2013/11/vimmarkdown.html)
 " (https://github.com/kannokanno/previm)
-NeoBundle 'vim-scripts/vim-auto-save'
-NeoBundle 'kannokanno/previm'
+"NeoBundle 'vim-scripts/vim-auto-save'
+"NeoBundle 'kannokanno/previm'
 "NeoBundle 'syui/scroll.vim'
-NeoBundle 'kana/vim-submode'
+"NeoBundle 'kana/vim-submode'
 augroup PrevimSettings
 	    autocmd!
 		    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
@@ -321,13 +336,20 @@ nnoremap <Leader>b :!open -a Safari %<CR>
 " ファイル検索
 " NeoBundle "ctrlpvim/ctrlp.vim"
 
-NeoBundle 'easymotion/vim-easymotion'
+"NeoBundle 'easymotion/vim-easymotion'
 
 map <leader>s <Plug>(easymotion-bd-f2)
 nmap <leader>s <Plug>(easymotion-overwin-f2)
 
 map <leader>l <Plug>(easymotion-bd-jk)
 nmap <leader>l <Plug>(easymotion-overwin-line)
+
+map f <Plug>(easymotion-fl)
+map t <Plug>(easymotion-tl)
+map F <Plug>(easymotion-Fl)
+map T <Plug>(easymotion-Tl)
+
+
 
 call neobundle#end()
 
@@ -351,6 +373,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'w0rp/ale'
 Plug 'prettier/vim-prettier', { 'do': 'yarn istall'}
+Plug 'vim-jp/vimdoc-ja'
+
 
 call plug#end()
 "--------------------------------------------------
