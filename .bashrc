@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
+#[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
 alias cl='clear'
 alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
@@ -34,6 +34,7 @@ export CATALINA_BASE=/Applications/apache-tomcat-8.5.34
 
 PATH=""
 
+PATH=/opt/homebrew/bin:${PATH}
 PATH=/opt/X11/bin:${PATH}
 PATH=/sbin:${PATH}
 PATH=/usr/sbin:${PATH}
@@ -74,10 +75,10 @@ export PATH
 export MANPATH
 #
 
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)/share"
-  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
-fi
+#if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+#  __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)/share"
+#  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+#fi
 
 #各オプションの内容
 #git/git-prompt.sh at master · git/git に記されている各オプションの内容をまとめます。
@@ -108,13 +109,29 @@ fi
 #各コマンド実行後に PROMPT_COMMAND の内容が毎回実行される。
 
 #PROMPT_COMMAND='__git_ps1 "\u:\W" "\\\$ "'
-PROMPT_COMMAND='__git_ps1 "\W" "\\\$ "'
+#PROMPT_COMMAND='__git_ps1 "\W" "\\\$ "'
+#GIT_PS1_SHOWDIRTYSTATE=true
+#GIT_PS1_SHOWSTASHSTATE=true
+#GIT_PS1_SHOWUNTRACKEDFILES=true
+#GIT_PS1_SHOWCOLORHINTS=true
+#GIT_PS1_HIDE_IF_PWD_IGNORED=true
+#GIT_PS1_SHOWUPSTREAM="auto"
+
+source /opt/homebrew/Cellar/git/2.37.3/etc/bash_completion.d/git-prompt.sh
+source /opt/homebrew/Cellar/git/2.37.3/etc/bash_completion.d/git-completion.bash
+
+#PROMPT_COMMAND='__git_ps1 "\W" "\\\$"'↲
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
 GIT_PS1_SHOWCOLORHINTS=true
 GIT_PS1_HIDE_IF_PWD_IGNORED=true
 GIT_PS1_SHOWUPSTREAM="auto"
+
+# 環境変数PS1の変更
+#export PS1='\[\033[1;34m\]\W\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \$ '
+export PS1='\W\[\033[1;32m\]$(__git_ps1)\[\033[00m\] \$ '
+
 
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -133,7 +150,7 @@ export PATH="~/.poetry/bin:${PATH}"
 echo "read bashrc"
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 
 
 #nodev17以上でのでのエラー対応
@@ -143,4 +160,4 @@ export NODE_OPTIONS=--openssl-legacy-provider
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && . "$HOME/.fig/shell/bashrc.post.bash"
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
+#[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
