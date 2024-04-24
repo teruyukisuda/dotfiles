@@ -112,7 +112,7 @@
 ##if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 ##if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-#. .bashrc
+. ~/.bashrc
 #echo "read bash_profile"
 
 
@@ -121,3 +121,5 @@
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

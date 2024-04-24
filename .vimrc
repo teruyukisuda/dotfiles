@@ -22,6 +22,8 @@ if dein#load_state('~/.cache/dein')
   " Let dein manage dein
   " Required:
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('kannokanno/previm')
+  let g:previm_open_cmd = 'open -a Safari'
 
 " プラグインリストを収めた TOML ファイル
   " 予め TOML ファイル（後述）を用意しておく
@@ -55,6 +57,9 @@ endif
 
 
 
+" html-equivなどを1単語として*で検索する
+set iskeyword+=-
+
 
 " leaderキーを,に変更
 let mapleader = ","
@@ -76,7 +81,7 @@ set noswapfile
 set backupdir=$HOME/vimbackup
 
 "クリップボードをMacと連携する
-set clipboard=unnamed
+set clipboard+=unnamed
 
 "開いたファイルのパスへ自動的に移動する
 set autochdir
@@ -139,6 +144,14 @@ set shortmess-=S
 nnoremap j gj
 nnoremap k gk
 
+
+" vim-airlineでタブラインにバッファを表示させる方法
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+"
+
+
+
 "選択行にあるコマンドを実行する
 vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
 nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
@@ -173,8 +186,8 @@ nnoremap <Leader>0 :silent ! start "%"
 
 " insertモードから抜ける
 "inoremap <C-j> <Esc>
-inoremap <C-e> <Esc>A
-inoremap <C-a> <Esc>I
+"inoremap <C-e> <Esc>A
+"inoremap <C-a> <Esc>I
 "vnoremap <C-j> <Esc>
 
 noremap <C-j> <esc>
@@ -188,8 +201,8 @@ noremap! <C-j> <esc>
 " insertモードでインサート
 "inoremap <C-n> <Down>
 "inoremap <C-p> <Up>
-"inoremap <C-b> <Left>
-"inoremap <C-f> <Right>
+imap <C-b> <Left>
+imap <C-f> <Right>
 
 " Markdown Preview (kannokanno/previmプラグイン用）
 " " <Ctrl+p>でプレビュー
@@ -344,10 +357,10 @@ nmap <leader>s <Plug>(easymotion-overwin-f2)
 map <leader>l <Plug>(easymotion-bd-jk)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 
-map f <Plug>(easymotion-fl)
-map t <Plug>(easymotion-tl)
-map F <Plug>(easymotion-Fl)
-map T <Plug>(easymotion-Tl)
+"map f <Plug>(easymotion-fl)
+"map t <Plug>(easymotion-tl)
+"map F <Plug>(easymotion-Fl)
+"map T <Plug>(easymotion-Tl)
 
 
 

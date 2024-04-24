@@ -1,5 +1,3 @@
-# Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
 alias cl='clear'
 alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
@@ -14,7 +12,7 @@ alias p='cd ~/project'
 
 #PATH export PATH=/Applications/MAMP/Library/bin:$PATH
 
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
 #Javaのバーション切り替え
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
@@ -22,8 +20,8 @@ alias p='cd ~/project'
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "14"`
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-#export JAVA_HOME=`/usr/libexec/java_home -v 11`
+#export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home -v 11`
 #export JAVA_HOME=`/usr/libexec/java_home -v 14`
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 
@@ -69,6 +67,8 @@ PATH=$HOME/.nodebrew/current/bin:${PATH}
 PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
 PATH=/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:${PATH}
 PATH=/Users/tsuda/project/p2net/p2netex-application/bin:${PATH}
+
+PATH=/Users/tsuda/.deno/bin:${PATH}
 
 export PATH
 export MANPATH
@@ -129,6 +129,9 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 # poetryをパスに通す
 export PATH="~/.poetry/bin:${PATH}"
 
+GOPATH=$HOME/project/go
+export PATH="${GOPATH}/bin:${PATH}"
+export GOROOT="$(brew --prefix golang)/libexec"
 
 echo "read bashrc"
 
@@ -137,10 +140,19 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 
 #nodev17以上でのでのエラー対応
-export NODE_OPTIONS=--openssl-legacy-provider
+#export NODE_OPTIONS=--openssl-legacy-provider
+export NODE_OPTIONS=
 
 # Fig post block. Keep at the bottom of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && . "$HOME/.fig/shell/bashrc.post.bash"
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
+#[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+source <(vr completions bash)
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH

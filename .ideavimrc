@@ -1,3 +1,7 @@
+
+" html-equivなどを1単語として*で検索する
+set iskeyword+=-
+
 " leaderキーを,に変更
 let mapleader = ","
 " ,のデフォルトの機能は、\で使えるように退避
@@ -126,8 +130,8 @@ vnoremap <C-j> <Esc>
 " insertモードでインサート
 "inoremap <C-n> <Down>
 "inoremap <C-p> <Up>
-"inoremap <C-b> <Left>
-"inoremap <C-f> <Right>
+imap <C-b> <Left>
+imap <C-f> <Right>
 
 " Markdown Preview (kannokanno/previmプラグイン用）
 " " <Ctrl+p>でプレビュー
@@ -457,6 +461,11 @@ set easymotion
 nmap <leader>s <Plug>(easymotion-bd-f2)
 
 nmap <leader>l <Plug>(easymotion-bd-jk)
+
+"map f <Plug>(easymotion-fl)
+"map t <Plug>(easymotion-tl)
+"map F <Plug>(easymotion-Fl)
+"map T <Plug>(easymotion-Tl)
 
 " multi cursors plugin
 set multiple-cursors
