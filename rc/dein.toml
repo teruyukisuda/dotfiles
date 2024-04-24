@@ -30,4 +30,6 @@ repo = 'easymotion/vim-easymotion'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
-
+ 
+[[plugins]]
+repo = 'vim-airline/vim-airline'

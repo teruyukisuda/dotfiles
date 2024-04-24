@@ -5,6 +5,9 @@ alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
 alias loglocal='less /private/var/log/p2netex/tomcat/p2net/app/System.out'
 alias p='cd ~/project'
+alias ls='ls --color=always'
+alias gls='gls --color=always'
+alias ll='ls -lFa'
 #export M2_HOME=/Applications/maven
 #export SVN_EDITOR=/usr/local/bin/vim
 #export CATALINA_HOME=/Applications/eclipse3.6_64bit/workspace3.6/apache-tomcat-7.0.23-src/output/build
@@ -14,7 +17,9 @@ alias p='cd ~/project'
 
 #PATH export PATH=/Applications/MAMP/Library/bin:$PATH
 
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+#[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+#[ -f /opt/homebrew/etc/bash_completion ] && . /opt/homebrew/etc/bash_completion
+[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
 #Javaのバーション切り替え
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
@@ -34,7 +39,6 @@ export CATALINA_BASE=/Applications/apache-tomcat-8.5.34
 
 PATH=""
 
-PATH=/opt/homebrew/bin:${PATH}
 PATH=/opt/X11/bin:${PATH}
 PATH=/sbin:${PATH}
 PATH=/usr/sbin:${PATH}
@@ -42,6 +46,7 @@ PATH=/bin:${PATH}
 PATH=/usr/bin:${PATH}
 PATH=/usr/local/bin:${PATH}
 PATH=$JAVA_HOME/bin:${PATH}
+PATH=/opt/homebrew/bin:${PATH}
 
 # coreutils
 PATH=/usr/local/opt/coreutils/libexec/gnubin:${PATH}
@@ -70,6 +75,7 @@ PATH=$HOME/.nodebrew/current/bin:${PATH}
 PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
 PATH=/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:${PATH}
 PATH=/Users/tsuda/project/p2net/p2netex-application/bin:${PATH}
+PATH=/Users/teruyukisuda/Library/Application\ Support/JetBrains/Toolbox/scripts:${PATH}
 
 export PATH
 export MANPATH
@@ -117,8 +123,8 @@ export MANPATH
 #GIT_PS1_HIDE_IF_PWD_IGNORED=true
 #GIT_PS1_SHOWUPSTREAM="auto"
 
-source /opt/homebrew/Cellar/git/2.37.3/etc/bash_completion.d/git-prompt.sh
-source /opt/homebrew/Cellar/git/2.37.3/etc/bash_completion.d/git-completion.bash
+#source /opt/homebrew/Cellar/git/2.37.3/etc/bash_completion.d/git-prompt.sh
+#source /opt/homebrew/Cellar/git/2.37.3/etc/bash_completion.d/git-completion.bash
 
 #PROMPT_COMMAND='__git_ps1 "\W" "\\\$"'↲
 GIT_PS1_SHOWDIRTYSTATE=true
@@ -154,10 +160,12 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 
 #nodev17以上でのでのエラー対応
-export NODE_OPTIONS=--openssl-legacy-provider
+#export NODE_OPTIONS=--openssl-legacy-provider
 
 # Fig post block. Keep at the bottom of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && . "$HOME/.fig/shell/bashrc.post.bash"
 
 # Fig post block. Keep at the bottom of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

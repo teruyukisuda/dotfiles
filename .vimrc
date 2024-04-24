@@ -139,6 +139,12 @@ set shortmess-=S
 nnoremap j gj
 nnoremap k gk
 
+
+" vim-airlineでタブラインにバッファを表示させる方法
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+
+
 "選択行にあるコマンドを実行する
 vnoremap <Space><CR> :!sh<CR>    # 行選択中に実行
 nnoremap <Space><CR> V:!sh<CR>   # 行選択していない状態から実行
