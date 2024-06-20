@@ -19,7 +19,7 @@ alias ll='ls -lFa'
 
 #[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 #[ -f /opt/homebrew/etc/bash_completion ] && . /opt/homebrew/etc/bash_completion
-[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
+[ -f $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion ] && . $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion
 
 #Javaのバーション切り替え
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
@@ -142,16 +142,18 @@ export PS1='\W\[\033[1;32m\]$(__git_ps1)\[\033[00m\] \$ '
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export PYENV_ROOT=~/.pyenv
-export PATH="${PYENV_ROOT}/shims:${PATH}"
-
-#pyenvとpyenv-virtualenvで補完がきくようにする
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+# export PYENV_ROOT=~/.pyenv
+# export PATH="${PYENV_ROOT}/shims:${PATH}"
+#
+##pyenvとpyenv-virtualenvで補完がきくようにする
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # poetryをパスに通す
-export PATH="~/.poetry/bin:${PATH}"
+#export PATH="~/.poetry/bin:${PATH}"
 
+# pipenvで仮想環境をプロジェクト配下に作る
+export PIPENV_VENV_IN_PROJECT=1
 
 echo "read bashrc"
 
