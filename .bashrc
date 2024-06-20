@@ -151,6 +151,11 @@ export NODE_OPTIONS=
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
+<<<<<<< HEAD
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
+=======
+# gh command completion
+eval "$(gh completion -s bash)"
+>>>>>>> e6ab9d0 (gh command completion)
