@@ -171,3 +171,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# gh command completion
+eval "$(gh completion -s bash)"
