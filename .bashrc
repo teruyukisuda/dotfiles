@@ -119,12 +119,12 @@ GIT_PS1_SHOWUPSTREAM="auto"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export PYENV_ROOT=~/.pyenv
-export PATH="${PYENV_ROOT}/shims:${PATH}"
+#export PYENV_ROOT=~/.pyenv
+#export PATH="${PYENV_ROOT}/shims:${PATH}"
 
-#pyenvとpyenv-virtualenvで補完がきくようにする
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+##pyenvとpyenv-virtualenvで補完がきくようにする
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # poetryをパスに通す
 export PATH="~/.poetry/bin:${PATH}"
