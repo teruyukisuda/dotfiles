@@ -27,7 +27,7 @@ alias ll='ls -lFa'
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "14"`
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
 
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home -v 21`
 #export JAVA_HOME=`/usr/libexec/java_home -v 11`
 #export JAVA_HOME=`/usr/libexec/java_home -v 14`
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
@@ -136,7 +136,8 @@ GIT_PS1_SHOWUPSTREAM="auto"
 
 # 環境変数PS1の変更
 #export PS1='\[\033[1;34m\]\W\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \$ '
-export PS1='\W\[\033[1;32m\]$(__git_ps1)\[\033[00m\] \$ '
+#export PS1='\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
+export PS1='\[\033[38;5;141m\]\w\[\033[00m\]$(__git_ps1)\[\033[00m\]\n\$ '
 
 
 
@@ -171,6 +172,12 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
 
 # gh command completion
 eval "$(gh completion -s bash)"
+
+# コマンド履歴の戻りを有効にするにはsttyで設定されているctrl+sを無効にすることで
+# ctrl+sでできるようにする
+stty stop undef
+
