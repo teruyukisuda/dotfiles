@@ -20,8 +20,9 @@ alias p='cd ~/project'
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "14"`
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
 
-#export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export JAVA_HOME=`/usr/libexec/java_home -v 11`
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+#export JAVA_HOME=`/usr/libexec/java_home -v 22`
+#export JAVA_HOME=`/usr/libexec/java_home -v 11`
 #export JAVA_HOME=`/usr/libexec/java_home -v 14`
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 
@@ -74,10 +75,10 @@ export PATH
 export MANPATH
 #
 
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-  __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)/share"
-  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
-fi
+#if [ -f "$(brew --prefix bash-git-prompt)/gitprompt.sh" ]; then
+#  __GIT_PROMPT_DIR="$(brew --prefix bash-git-prompt)"
+#  source "$(brew --prefix bash-git-prompt)/gitprompt.sh"
+#fi
 
 #各オプションの内容
 #git/git-prompt.sh at master · git/git に記されている各オプションの内容をまとめます。
@@ -107,8 +108,9 @@ fi
 #＊PS1 の前に PROMPT_COMMAND の内容が実行される。*
 #各コマンド実行後に PROMPT_COMMAND の内容が毎回実行される。
 
+
 #PROMPT_COMMAND='__git_ps1 "\u:\W" "\\\$ "'
-PROMPT_COMMAND='__git_ps1 "\W" "\\\$ "'
+#PROMPT_COMMAND='\w\[\033[1;32m\]$(__git_ps1)\n\$'
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWSTASHSTATE=true
 GIT_PS1_SHOWUNTRACKEDFILES=true
@@ -116,6 +118,9 @@ GIT_PS1_SHOWCOLORHINTS=true
 GIT_PS1_HIDE_IF_PWD_IGNORED=true
 GIT_PS1_SHOWUPSTREAM="auto"
 
+#export PS1='\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
+export PS1='\[\033[1;31m\]\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
+#export PS1='\w\[\033[1;32m\]$(__git_ps1)\n\$ '↲
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
@@ -158,3 +163,4 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
 # gh command completion
 eval "$(gh completion -s bash)"
+export PATH="$(brew --prefix python)/libexec/bin:$PATH"

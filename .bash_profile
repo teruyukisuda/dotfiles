@@ -117,9 +117,9 @@
 
 
 
-. "$HOME/.cargo/env"
-
-export PATH="$HOME/.poetry/bin:$PATH"
-
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+#. "$HOME/.cargo/env"
+#
+#export PATH="$HOME/.poetry/bin:$PATH"
+#
+#export VOLTA_HOME="$HOME/.volta"
+#export PATH="$VOLTA_HOME/bin:$PATH"
