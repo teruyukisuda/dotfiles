@@ -76,6 +76,7 @@ PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
 PATH=/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:${PATH}
 PATH=/Users/tsuda/project/p2net/p2netex-application/bin:${PATH}
 PATH=/Users/teruyukisuda/Library/Application\ Support/JetBrains/Toolbox/scripts:${PATH}
+PATH=/opt/homebrew/opt/mysql-client/bin/:${PATH}
 
 export PATH
 export MANPATH
