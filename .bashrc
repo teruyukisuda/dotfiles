@@ -27,7 +27,8 @@ alias ll='ls -lFa'
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "14"`
 #export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
 
-export JAVA_HOME=`/usr/libexec/java_home -v 21`
+#export JAVA_HOME=`/usr/libexec/java_home -v 21`
+export JAVA_HOME=`/usr/libexec/java_home -v 17`
 #export JAVA_HOME=`/usr/libexec/java_home -v 11`
 #export JAVA_HOME=`/usr/libexec/java_home -v 14`
 #export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
@@ -174,6 +175,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
+export PATH="$PATH:/opt/homebrew/opt/postgresql@15/bin"
 
 # gh command completion
 eval "$(gh completion -s bash)"
