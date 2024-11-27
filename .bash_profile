@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-[[ -f "$HOME/.fig/shell/bash_profile.pre.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.pre.bash"
+#[[ -f "$HOME/.fig/shell/bash_profile.pre.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.pre.bash"
 #alias doc='cd ~/Documents'
 #alias code='cd ~/Documents/Code'
 #alias pathc='pwd | pbcopy'
@@ -114,14 +114,14 @@
 ##if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 ##if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-#. .bashrc
-#echo "read bash_profile"
+echo "read bash_profile"
+. .bashrc
 
 
 
-. "$HOME/.cargo/env"
+#. "$HOME/.cargo/env"
 
-export PATH="$HOME/.poetry/bin:$PATH"
+#export PATH="$HOME/.poetry/bin:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
-[[ -f "$HOME/.fig/shell/bash_profile.post.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.post.bash"
+#[[ -f "$HOME/.fig/shell/bash_profile.post.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.post.bash"

@@ -237,12 +237,12 @@ let g:user_emmet_leader_key='<C-Z>'
 "" Start Neobundle Settings.
 "----------------------------------------------------
 "" bundleで管理するディレクトリを指定
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+"set runtimepath+=~/.vim/bundle/neobundle.vim/
  
-call neobundle#begin(expand('~/.vim/bundle/'))
+"call neobundle#begin(expand('~/.vim/bundle/'))
 
 "neobundle自体をneobundleで管理
-NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundleFetch 'Shougo/neobundle.vim'
 
 "install
 "NeoBundle 'scrooloose/nerdtree'
@@ -357,7 +357,7 @@ map T <Plug>(easymotion-Tl)
 
 
 
-call neobundle#end()
+"call neobundle#end()
 
 filetype plugin on
 filetype plugin indent on
@@ -365,7 +365,7 @@ filetype plugin indent on
 "
 "未インストールのプラグインがある場合、インストールするかどうかを尋ねてくれるようにする設定
 "毎回聞かれると邪魔な場合もあるので、この設定は任意です。
-NeoBundleCheck
+"NeoBundleCheck
 "       
 "--------------------------------------------------
 " End Neobundle Settings.

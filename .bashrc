@@ -136,11 +136,19 @@ GIT_PS1_SHOWCOLORHINTS=true
 GIT_PS1_HIDE_IF_PWD_IGNORED=true
 GIT_PS1_SHOWUPSTREAM="auto"
 
+# Gitの補完と プロンプト用スクリプトの読み込み
+if [ -f "/opt/homebrew/etc/bash_completion.d/git-prompt.sh" ]; then
+    . "/opt/homebrew/etc/bash_completion.d/git-prompt.sh"
+fi
+if [ -f "/opt/homebrew/etc/bash_completion.d/git-completion.bash" ]; then
+    . "/opt/homebrew/etc/bash_completion.d/git-completion.bash"
+fi
+
 # 環境変数PS1の変更
 #export PS1='\[\033[1;34m\]\W\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \$ '
 #export PS1='\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
-export PS1='\[\033[38;5;141m\]\w\[\033[00m\]$(__git_ps1)\[\033[00m\]\n\$ '
-
+#export PS1='\[\033[38;5;141m\]\w\[\033[00m\]$(__git_ps1)\[\033[00m\]\n\$ '
+export PS1='\[\033[1;31m\]\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
 
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
