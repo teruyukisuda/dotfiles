@@ -114,10 +114,10 @@
 ##if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 ##if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-echo "read bash_profile"
-. .bashrc
-
-
+# .bashrcを読み込む
+if [ -f "${HOME}/dotfiles/.bashrc" ]; then
+    . "${HOME}/dotfiles/.bashrc"
+fi
 
 #. "$HOME/.cargo/env"
 
@@ -125,3 +125,11 @@ echo "read bash_profile"
 
 # Fig post block. Keep at the bottom of this file.
 #[[ -f "$HOME/.fig/shell/bash_profile.post.bash" ]] && builtin source "$HOME/.fig/shell/bash_profile.post.bash"
+
+complete -C /opt/homebrew/bin/terraform terraform
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+
+# SDKMAN
+#export SDKMAN_DIR="$HOME/.sdkman"
+#[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

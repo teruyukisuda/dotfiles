@@ -1,3 +1,19 @@
+" MacVim用のカーソル設定
+if has('gui_macvim')
+    set guicursor=n-v-c:block-Cursor/lCursor-blinkon0
+    set guicursor+=i:ver25-Cursor/lCursor-blinkon0
+    set guicursor+=r:hor20-Cursor/lCursor-blinkon0
+endif
+
+if has('gui_macvim')
+   set transparency=5    " 透明度を指定
+   set guifont=Menlo:h14 " フォントとサイズを指定
+   set guioptions-=T     " ツールバーを非表示
+   set guioptions-=r     " 右スクロールバーを非表示
+   set guioptions-=L     " 左スクロールバーを非表示
+endif
+
+
 "------------------------------------------------
 " Start Dein Settings.
 "--------------------------------------------------
@@ -5,6 +21,7 @@
 "----------------------------------------------------
 "" Start dein Settings.
 "----------------------------------------------------
+
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -63,7 +80,7 @@ noremap \  ,
 
 
 "set t_Co=256
-set term=xterm-256color
+"set term=xterm-256color
 "highlight Normal ctermbg=none
 
 "行番号表示
@@ -116,13 +133,13 @@ set smarttab
 set grepformat=%f:%l:%m,%f:%l%m,%f\ \ %l%m,%f
 set grepprg=grep\ -nh
 
-set guifont=Ricty:h14
-set guifontwide=Ricty:h14
+"set guifont=Ricty:h14
+"set guifontwide=Ricty:h14
 
 "タブ幅の設定
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 "set smartindent
 "新しい行のインデントを現在行と同じにする
 "set autoindent 
@@ -139,6 +156,8 @@ set shortmess-=S
 nnoremap j gj
 nnoremap k gk
 
+nnoremap / /\v
+nnoremap ? ?\v
 
 " vim-airlineでタブラインにバッファを表示させる方法
 let g:airline#extensions#tabline#enabled = 1
@@ -318,7 +337,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 " ウインドウのリサイズ Ctrl + Yでリサイズモード
 "NeoBundle 'simeji/winresizer'
-let g:winresizer_start_key = '<C-Y>'
+"let g:winresizer_start_key = '<C-Y>'
 
 " ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ markdownプレビュー
 " （http://note103.hateblo.jp/entry/2014/02/11/005326)
@@ -329,11 +348,10 @@ let g:winresizer_start_key = '<C-Y>'
 "NeoBundle 'syui/scroll.vim'
 "NeoBundle 'kana/vim-submode'
 augroup PrevimSettings
-	    autocmd!
-		    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-		augroup END
+      autocmd!
+      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
-let g:previm_open_cmd = 'open -a Safari'
+let g:previm_open_cmd = 'open -a "Google Chrome"'
 " ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ markdownプレビュー
 
 
@@ -350,11 +368,10 @@ nmap <leader>s <Plug>(easymotion-overwin-f2)
 map <leader>l <Plug>(easymotion-bd-jk)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 
-map f <Plug>(easymotion-fl)
-map t <Plug>(easymotion-tl)
-map F <Plug>(easymotion-Fl)
-map T <Plug>(easymotion-Tl)
-
+"map f <Plug>(easymotion-fl)
+"map t <Plug>(easymotion-tl)
+"map F <Plug>(easymotion-Fl)
+"map T <Plug>(easymotion-Tl)
 
 
 "call neobundle#end()

@@ -1,5 +1,6 @@
 # Fig pre block. Keep at the top of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
+echo "read bashrc"
 alias cl='clear'
 alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
@@ -19,68 +20,55 @@ alias ll='ls -lFa'
 
 #[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 #[ -f /opt/homebrew/etc/bash_completion ] && . /opt/homebrew/etc/bash_completion
-[ -f $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion ] && . $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion
+#[ -f $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion ] && . $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
-#Javaのバーション切り替え
-#export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
-#export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "11"`
-#export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "14"`
-#export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
-
-#export JAVA_HOME=`/usr/libexec/java_home -v 21`
-export JAVA_HOME=`/usr/libexec/java_home -v 17`
-#export JAVA_HOME=`/usr/libexec/java_home -v 11`
-#export JAVA_HOME=`/usr/libexec/java_home -v 14`
-#export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
 
 #PosgreSql環境変数PGDATAの設定
 export PGDATA=/var/lib/p2netex/postgresql/p2net/data
 export CATALINA_HOME=/Applications/apache-tomcat-8.5.34
 export CATALINA_BASE=/Applications/apache-tomcat-8.5.34
 
-PATH=""
+# PATH設定を一度だけ構築（重複を避ける）
+# # 基本的なシステムパス
+PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
-PATH=/opt/X11/bin:${PATH}
-PATH=/sbin:${PATH}
-PATH=/usr/sbin:${PATH}
-PATH=/bin:${PATH}
-PATH=/usr/bin:${PATH}
-PATH=/usr/local/bin:${PATH}
-PATH=$JAVA_HOME/bin:${PATH}
-PATH=/opt/homebrew/bin:${PATH}
+# sdkmanのjavaが自動的にPATHに追加される
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# coreutils
-PATH=/usr/local/opt/coreutils/libexec/gnubin:${PATH}
-MANPATH=/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}
-# ed
-PATH=/usr/local/opt/ed/libexec/gnubin:${PATH}
-MANPATH=/usr/local/opt/ed/libexec/gnuman:${MANPATH}
-# findutils
-PATH=/usr/local/opt/findutils/libexec/gnubin:${PATH}
-MANPATH=/usr/local/opt/findutils/libexec/gnuman:${MANPATH}
-# sed
-PATH=/usr/local/opt/gnu-sed/libexec/gnubin:${PATH}
-MANPATH=/usr/local/opt/gnu-sed/libexec/gnuman:${MANPATH}
-# tar
-PATH=/usr/local/opt/gnu-tar/libexec/gnubin:${PATH}
-MANPATH=/usr/local/opt/gnu-tar/libexec/gnuman:${MANPATH}
-# grep
-PATH=/usr/local/opt/grep/libexec/gnubin:${PATH}
-MANPATH=/usr/local/opt/grep/libexec/gnuman:${MANPATH}
+# Homebrew
+PATH="/opt/homebrew/bin:$PATH"
 
-PATH=/Applications/Wireshark.app/Contents/MacOS:${PATH}
-PATH=/Users/tsuda/p2netex-traversal-console/bin:${PATH}
-#PATH=/usr/local/bin:${PATH}
-PATH=/Users/tsuda/p2netex-builder/bin:${PATH}
-PATH=$HOME/.nodebrew/current/bin:${PATH}
-PATH=/usr/local/opt/postgresql@9.6/bin:${PATH}
-PATH=/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:${PATH}
-PATH=/Users/tsuda/project/p2net/p2netex-application/bin:${PATH}
-PATH=/Users/teruyukisuda/Library/Application\ Support/JetBrains/Toolbox/scripts:${PATH}
-PATH=/opt/homebrew/opt/mysql-client/bin/:${PATH}
+# GNU tools (Homebrew)
+PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH" 
+PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+PATH="/opt/homebrew/opt/gnu-tar/libexec/gnubin:$PATH"
+PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
+PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
+
+# Volta (Node.js管理)
+export VOLTA_HOME="$HOME/.volta"
+PATH="$VOLTA_HOME/bin:$PATH"
+
+# その他のツール
+PATH="/Applications/Wireshark.app/Contents/MacOS:$PATH"
+PATH="/Users/tsuda/p2netex-traversal-console/bin:$PATH"
+PATH="/Users/tsuda/p2netex-builder/bin:$PATH"
+PATH="$HOME/.nodebrew/current/bin:$PATH"
+PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+PATH="/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:$PATH"
+PATH="/Users/tsuda/project/p2net/p2netex-application/bin:$PATH"
+PATH="/Users/teruyukisuda/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+# X11とDocker
+PATH="/opt/X11/bin:$PATH"
+PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
+PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 
 export PATH
-export MANPATH
 #
 
 #if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
@@ -166,8 +154,6 @@ export PS1='\[\033[1;31m\]\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
 # pipenvで仮想環境をプロジェクト配下に作る
 export PIPENV_VENV_IN_PROJECT=1
 
-echo "read bashrc"
-
 export BASH_SILENCE_DEPRECATION_WARNING=1
 #. "$HOME/.cargo/env"
 
@@ -180,8 +166,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Fig post block. Keep at the bottom of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
 export PATH="$PATH:/opt/homebrew/opt/postgresql@15/bin"
 
