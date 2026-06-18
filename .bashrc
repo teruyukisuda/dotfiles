@@ -3,6 +3,10 @@ alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
 alias loglocal='less /private/var/log/p2netex/tomcat/p2net/app/System.out'
 alias p='cd ~/project'
+alias i='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
+alias ls='ls --color=always'
+alias gls='gls --color=always'
+alias ll='ls -lFa'
 #export M2_HOME=/Applications/maven
 #export SVN_EDITOR=/usr/local/bin/vim
 #export CATALINA_HOME=/Applications/eclipse3.6_64bit/workspace3.6/apache-tomcat-7.0.23-src/output/build
