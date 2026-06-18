@@ -13,6 +13,7 @@ if has('gui_macvim')
    set guioptions-=L     " 左スクロールバーを非表示
 endif
 
+set fileencodings=ucs-bom,utf-8,cp932,euc-jp,latin1
 
 "------------------------------------------------
 " Start Dein Settings.

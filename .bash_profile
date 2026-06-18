@@ -133,3 +133,6 @@ complete -C /opt/homebrew/bin/terraform terraform
 # SDKMAN
 #export SDKMAN_DIR="$HOME/.sdkman"
 #[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# uv
+export PATH="/Users/tsuda/.local/bin:$PATH"

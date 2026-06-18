@@ -6,6 +6,7 @@ alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
 alias loglocal='less /private/var/log/p2netex/tomcat/p2net/app/System.out'
 alias p='cd ~/project'
+alias i='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
 alias ls='ls --color=always'
 alias gls='gls --color=always'
 alias ll='ls -lFa'
@@ -49,8 +50,11 @@ PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 
 # Volta (Node.js管理)
-export VOLTA_HOME="$HOME/.volta"
-PATH="$VOLTA_HOME/bin:$PATH"
+#export VOLTA_HOME="$HOME/.volta"
+#PATH="$VOLTA_HOME/bin:$PATH"
+
+# fnmの設定を追加
+eval "$(fnm env --use-on-cd)"
 
 # その他のツール
 PATH="/Applications/Wireshark.app/Contents/MacOS:$PATH"
@@ -67,6 +71,7 @@ PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 PATH="/opt/X11/bin:$PATH"
 PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
 PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+PATH="$HOME/.claude/local:$PATH"
 
 export PATH
 #
@@ -132,6 +137,12 @@ if [ -f "/opt/homebrew/etc/bash_completion.d/git-completion.bash" ]; then
     . "/opt/homebrew/etc/bash_completion.d/git-completion.bash"
 fi
 
+# wfxコマンドの補完
+if [[ -f "/usr/local/share/bash-completion/completions/wfx" ]]; then
+  source "/usr/local/share/bash-completion/completions/wfx"
+fi
+
+
 # 環境変数PS1の変更
 #export PS1='\[\033[1;34m\]\W\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \$ '
 #export PS1='\w\[\033[1;32m\]$(__git_ps1)\[\033[00m\]\n\$ '
@@ -176,3 +187,6 @@ eval "$(gh completion -s bash)"
 # ctrl+sでできるようにする
 stty stop undef
 
+
+# uv
+export PATH="/Users/tsuda/.local/bin:$PATH"
