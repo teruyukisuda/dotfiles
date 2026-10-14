@@ -190,3 +190,50 @@ stty stop undef
 
 # uv
 export PATH="/Users/tsuda/.local/bin:$PATH"
+
+# =============================================================================
+# fzf / Claude Code レビュー用
+# =============================================================================
+# fzf のキーバインド (Ctrl-R 履歴, Ctrl-T ファイル, Alt-C ディレクトリ移動)
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --bash)"
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+fi
+
+# Claude Code に書かせたコードをリポジトリ単位でレビューするためのヘルパー
+#   changed [root]  : 未コミットの変更があるリポジトリを一覧する (既定: ~/project/iso)
+#   review  [root]  : 変更のあるリポジトリを fzf で選び、vim で差分レビューを開く
+#   cw      [dir]   : tmux に「左 vim / 右 claude」の作業ウィンドウを作る
+REVIEW_ROOT="${REVIEW_ROOT:-$HOME/project/iso}"
+
+__review_repos() {
+  local root="${1:-$REVIEW_ROOT}" d n
+  for d in "$root"/*/ "$root"/worktrees/*/; do
+    [ -e "$d/.git" ] || continue
+    n=$(git -C "$d" status --porcelain 2>/dev/null | wc -l | tr -d ' ')
+    [ "$n" -gt 0 ] && printf '%s\t%s\n' "$n" "${d%/}"
+  done | sort -rn
+}
+
+changed() {
+  __review_repos "$1" | awk -F'\t' '{ printf "%4d  %s\n", $1, $2 }'
+}
+
+review() {
+  local repo
+  repo=$(__review_repos "$1" | fzf --with-nth=2.. --delimiter='\t' \
+          --preview 'git -C {2} status --short && echo && git -C {2} diff --stat HEAD' \
+          --preview-window=right:55%) || return
+  repo=${repo#*	}
+  cd "$repo" || return
+  vim -c 'Git' -c 'Git difftool -y HEAD' -c 'tabfirst'
+}
+
+cw() {
+  local dir="${1:-$PWD}"
+  dir=$(cd "$dir" && pwd) || return
+  tmux new-window -c "$dir" -n "$(basename "$dir")" \; \
+       split-window -h -c "$dir" 'claude' \; \
+       select-pane -L
+}

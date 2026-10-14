@@ -1,14 +1,5 @@
 [[plugins]]
-repo = 'Shougo/unite.vim'
-
-[[plugins]]
 repo = 'Shougo/neocomplete.vim'
-
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-
-[[plugins]]
-repo = 'rking/ag.vim'
 
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
@@ -27,7 +18,7 @@ repo = 'easymotion/vim-easymotion'
 
 [[plugins]]
 repo = 'tpope/vim-surround'
- 
+
 [[plugins]]
 repo = 'vim-airline/vim-airline'
 
@@ -36,3 +27,21 @@ repo = 'previm/previm'
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+
+# --- Git レビュー用 ---------------------------------------------------------
+# :Git / :Gvdiffsplit / :Git difftool -y
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+# ハンク表示・プレビュー・部分ステージ・取り消し
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+# :Files :Buffers :Rg :GFiles? :Commits :BCommits
+# 土台の fzf 本体は Homebrew 版 (/opt/homebrew/opt/fzf) を .vimrc で runtimepath に追加している
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+# カーソル行の blame をポップアップ表示
+[[plugins]]
+repo = 'rhysd/git-messenger.vim'
