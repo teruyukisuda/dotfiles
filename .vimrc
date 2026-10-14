@@ -142,12 +142,6 @@ nnoremap <Leader>ii :normal gg=G<CR>
 " html / xml を要素ごとに改行
 nnoremap <Leader>ff :%s/></>\r</g<CR>
 
-" バッファ移動
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-
 " quickfix 移動 (:grep, :Rg, :GitGutterQuickFix などの結果)
 nnoremap <silent> [q :cprevious<CR>
 nnoremap <silent> ]q :cnext<CR>
@@ -333,6 +327,15 @@ nnoremap <silent> <Leader>hf :GitGutterFold<CR>
 " git-messenger
 let g:git_messenger_no_default_mappings = v:true
 nmap <Leader>gm <Plug>(git-messenger)
+
+" fugitive の画面と s プレフィックス / バッファ移動の衝突を解消する
+"   - ステータス画面では fugitive が s を「ステージ」に割り当てるので外す (ステージは - で行う)
+"   - fugitive:// の比較元バッファと一時バッファはバッファ一覧 (:bn :bp :Buffers) に出さない
+augroup FugitiveReviewKeys
+  autocmd!
+  autocmd User FugitiveIndex silent! nunmap <buffer> s
+  autocmd User FugitiveIndex,FugitiveObject,FugitivePager setlocal nobuflisted
+augroup END
 
 " -----------------------------------------------------------------------------
 " 配色

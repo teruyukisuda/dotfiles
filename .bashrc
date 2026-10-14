@@ -227,7 +227,9 @@ review() {
           --preview-window=right:55%) || return
   repo=${repo#*	}
   cd "$repo" || return
-  vim -c 'Git' -c 'Git difftool -y HEAD' -c 'tabfirst'
+  # Gedit : はステータス画面を現在のウィンドウに開く (:Git だと空バッファとの分割になり、
+  # 空の [No Name] がバッファ一覧に残る)
+  vim -c 'Gedit :' -c 'Git difftool -y HEAD' -c 'tabfirst'
 }
 
 cw() {
