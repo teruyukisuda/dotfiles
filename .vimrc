@@ -370,10 +370,15 @@ nmap <Leader>gm <Plug>(git-messenger)
 " fugitive の画面と s プレフィックス / バッファ移動の衝突を解消する
 "   - ステータス画面では fugitive が s を「ステージ」に割り当てるので外す (ステージは - で行う)
 "   - fugitive:// の比較元バッファと一時バッファはバッファ一覧 (:bn :bp :Buffers) に出さない
+"   - コミットの画面などには fugitive が gq を割り当てないので、:bdelete で閉じられるようにする
+"     (blame から <CR> で飛んだ先がこれで、元のファイルのウィンドウを置き換えている)
 augroup FugitiveReviewKeys
   autocmd!
   autocmd User FugitiveIndex silent! nunmap <buffer> s
   autocmd User FugitiveIndex,FugitiveObject,FugitivePager setlocal nobuflisted
+  autocmd User FugitiveObject if !get(maparg('gq', 'n', 0, 1), 'buffer', 0)
+        \ | nnoremap <buffer> <silent> gq :<C-u>bdelete<CR>
+        \ | endif
 augroup END
 
 " -----------------------------------------------------------------------------
