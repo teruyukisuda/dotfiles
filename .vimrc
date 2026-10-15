@@ -286,7 +286,7 @@ nnoremap <silent> <Leader>R  :Rg <C-r><C-w><CR>
 "   ,gD  : 未ステージの変更ファイルを全部タブで開き、左右差分にする (gt で次のファイル, ]c [c でハンク移動)
 "   ,gH  : HEAD との差分を全部タブで開く (ステージ済みも含めて全部見たいとき)
 "   ,gd  : 現在のファイルだけ左右差分
-"   ,gq  : レビュー用に開いたタブを全部閉じる
+"   ,gq  : レビュー用に開いたタブと fugitive の画面を閉じ、普通のファイルのウィンドウを 1 つだけ残す
 "   ]h [h: ハンク移動   ,hp: プレビュー   ,hs: ハンクをステージ   ,hu: ハンクを取り消し
 "   ,gf  : 変更ファイルを fzf で選んで開く   ,gc: このファイルのコミット履歴   ,gC: リポジトリのコミット履歴
 "   ,gm  : カーソル行の blame をポップアップ表示
@@ -298,7 +298,46 @@ nnoremap <silent> <Leader>gD :Git difftool -y<CR>
 nnoremap <silent> <Leader>gH :Git difftool -y HEAD<CR>
 nnoremap <silent> <Leader>gb :Git blame<CR>
 nnoremap <silent> <Leader>gl :Git log --oneline -50<CR>
-nnoremap <silent> <Leader>gq :tabonly<CR>:only<CR>
+nnoremap <silent> <Leader>gq :call <SID>ReviewClose()<CR>
+
+" fugitive の画面 (ステータス / ログ / blame / コミット / fugitive:// の比較元) や
+" quickfix・プレビューではない、普通のファイルのウィンドウか
+function! s:IsFileWindow(winid) abort
+  let l:buf = winbufnr(a:winid)
+  return getbufvar(l:buf, '&buftype') ==# ''
+        \ && bufname(l:buf) !~# '^fugitive://'
+        \ && index(['fugitive', 'git', 'fugitiveblame'], getbufvar(l:buf, '&filetype')) < 0
+endfunction
+
+" カーソル位置に関係なく、普通のファイルのウィンドウを 1 つだけ残して他のタブとウィンドウを閉じる。
+" 候補は 今のウィンドウ → 今のタブ → 他のタブ の順に探し、無ければ空のバッファにする
+function! s:ReviewClose() abort
+  let l:target = 0
+  if s:IsFileWindow(win_getid())
+    let l:target = win_getid()
+  else
+    let l:tabs = [tabpagenr()] + filter(range(1, tabpagenr('$')), 'v:val != tabpagenr()')
+    for l:tab in l:tabs
+      for l:winid in map(range(1, tabpagewinnr(l:tab, '$')), 'win_getid(v:val, l:tab)')
+        if s:IsFileWindow(l:winid)
+          let l:target = l:winid
+          break
+        endif
+      endfor
+      if l:target
+        break
+      endif
+    endfor
+  endif
+  if l:target
+    call win_gotoid(l:target)
+  endif
+  tabonly
+  only
+  if !l:target
+    enew
+  endif
+endfunction
 
 " fzf.vim (git)
 nnoremap <silent> <Leader>gf :GFiles?<CR>

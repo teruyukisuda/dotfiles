@@ -204,6 +204,7 @@ fi
 # Claude Code に書かせたコードをリポジトリ単位でレビューするためのヘルパー
 #   changed [root]  : 未コミットの変更があるリポジトリを一覧する (既定: ~/project/iso)
 #   review  [root]  : 変更のあるリポジトリを fzf で選び、vim で差分レビューを開く
+#   review  <repo>  : 引数がリポジトリそのものなら、fzf を通さずにそのリポジトリを開く
 #   cw      [dir]   : tmux に「左 vim / 右 claude」の作業ウィンドウを作る
 REVIEW_ROOT="${REVIEW_ROOT:-$HOME/project/iso}"
 
@@ -222,10 +223,19 @@ changed() {
 
 review() {
   local repo
-  repo=$(__review_repos "$1" | fzf --with-nth=2.. --delimiter='\t' \
-          --preview 'git -C {2} status --short && echo && git -C {2} diff --stat HEAD' \
-          --preview-window=right:55%) || return
-  repo=${repo#*	}
+  if [ -n "$1" ] && [ -e "$1/.git" ]; then
+    # 引数がリポジトリそのものなら fzf を通さずに開く
+    if [ -z "$(git -C "$1" status --porcelain 2>/dev/null)" ]; then
+      echo "review: 未コミットの変更がありません: $1" >&2
+      return 1
+    fi
+    repo=$1
+  else
+    repo=$(__review_repos "$1" | fzf --with-nth=2.. --delimiter='\t' \
+            --preview 'git -C {2} status --short && echo && git -C {2} diff --stat HEAD' \
+            --preview-window=right:55%) || return
+    repo=${repo#*	}
+  fi
   cd "$repo" || return
   # Gedit : はステータス画面を現在のウィンドウに開く (:Git だと空バッファとの分割になり、
   # 空の [No Name] がバッファ一覧に残る)
