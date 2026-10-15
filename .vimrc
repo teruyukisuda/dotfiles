@@ -471,4 +471,14 @@ augroup END
 " -----------------------------------------------------------------------------
 " 配色
 " -----------------------------------------------------------------------------
+" badwolf の diff の色は灰色の濃淡だけで、変更行 (DiffChange) は CursorLine と同じ色になり
+" 左右差分で追加・変更・変更なしの区別が付きにくい。diff の 4 色だけ色相の違う背景に上書きする
+augroup DiffColors
+  autocmd!
+  autocmd ColorScheme badwolf
+        \   highlight DiffAdd    ctermfg=NONE ctermbg=22 guifg=NONE    guibg=#005f00 cterm=NONE gui=NONE
+        \ | highlight DiffDelete ctermfg=52   ctermbg=52 guifg=#5f0000 guibg=#5f0000 cterm=NONE gui=NONE
+        \ | highlight DiffChange ctermfg=NONE ctermbg=17 guifg=NONE    guibg=#00005f cterm=NONE gui=NONE
+        \ | highlight DiffText   ctermfg=15   ctermbg=25 guifg=#ffffff guibg=#005faf cterm=bold gui=bold
+augroup END
 colorscheme badwolf
