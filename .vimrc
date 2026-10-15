@@ -177,8 +177,8 @@ nnoremap sp :<C-u>bp<CR>
 nnoremap st :<C-u>tabnew<CR>
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
-nnoremap sq :<C-u>q<CR>
-nnoremap sQ :<C-u>bd<CR>
+" バッファを閉じる (ウィンドウだけ閉じるなら :q)
+nnoremap sq :<C-u>bd<CR>
 nnoremap <silent> sb :<C-u>Buffers<CR>
 nnoremap <silent> sB :<C-u>Windows<CR>
 nnoremap <silent> sT :<C-u>Windows<CR>
