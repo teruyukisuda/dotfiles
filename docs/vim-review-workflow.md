@@ -332,6 +332,28 @@ Unstaged と Untracked の欄が無くなったら、そのリポジトリのレ
 新規ファイルは Untracked 欄に出る。差分が無い（全部が追加）ので、`o` で開いて全体を読み、
 `:q` で戻って、採用するなら `-` でステージする。`X` で消すこともできる。
 
+### 2-5. ターミナルで同じことをする
+
+ステージ・アンステージ・取り消しは、ターミナルの git コマンドでもできる。
+
+| やりたいこと | コマンド | ステータス画面では |
+|---|---|---|
+| ステージする | `git add <file>` | `-` |
+| ハンクを選んでステージする | `git add -p <file>`（ハンクごとに `y` / `n` で答える） | ハンクの中で `-` |
+| ステージを外す（作業ツリーの変更は残る） | `git restore --staged <file>`、または `git unstage <file>` | Staged 欄で `-` |
+| ハンクを選んでステージを外す | `git restore --staged -p <file>` | Staged 欄のハンクの中で `-` |
+| 未ステージの変更を捨てる | `git restore <file>` | Unstaged 欄で `X` |
+| ハンクを選んで未ステージの変更を捨てる | `git restore -p <file>` | Unstaged 欄のハンクの中で `X` |
+| ステージ済みも含めて HEAD の状態に戻す | `git restore --staged --worktree <file>` | — |
+
+- `git unstage` は `~/.gitconfig` の alias で、中身は `reset HEAD --`。ファイルを指定しなければ全部外れる
+- `git restore` は `--staged` の有無で意味が逆になる。`--staged` を付けると index を HEAD に戻し（アンステージ）、
+  付けないと作業ツリーを index に戻す（変更を捨てる）
+- `git restore <file>` と `--worktree` 付きで捨てた変更は、git の履歴に残らないので元に戻せない。
+  ステータス画面の `X` は元に戻すコマンドを表示してくれるので、迷うときはそちらを使う
+- ファイルを指定せずに `git restore` だけを打つと、パスを指定するよう求めるエラーになり、何も変わらない
+- 新規ファイル（Untracked）は `git restore` の対象外。消すときは `rm <file>`
+
 ---
 
 ## 3. コミット済みの変更を見る
