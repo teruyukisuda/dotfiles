@@ -29,19 +29,11 @@ repo = 'previm/previm'
 repo = 'tyru/open-browser.vim'
 
 # --- Git レビュー用 ---------------------------------------------------------
-# :Git / :Gvdiffsplit / :Git difftool -y
+# :Git / :Gvdiffsplit / :Git difftool -y / :Git blame (.vimrc の :Review もこれを使う)
 [[plugins]]
 repo = 'tpope/vim-fugitive'
-
-# ハンク表示・プレビュー・部分ステージ・取り消し
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
 
 # :Files :Buffers :Rg :GFiles? :Commits :BCommits
 # 土台の fzf 本体は Homebrew 版 (/opt/homebrew/opt/fzf) を .vimrc で runtimepath に追加している
 [[plugins]]
 repo = 'junegunn/fzf.vim'
-
-# カーソル行の blame をポップアップ表示
-[[plugins]]
-repo = 'rhysd/git-messenger.vim'
