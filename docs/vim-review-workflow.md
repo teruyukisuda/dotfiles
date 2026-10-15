@@ -434,6 +434,8 @@ vim を開くまでもないときは、ターミナルで見る。
 | `git show abc123` | コミット 1 つのメッセージと差分 |
 | `tig main..` | コミット一覧の画面。コミットを選んで `Enter` で差分が開く |
 | `git -c delta.side-by-side=false diff ...` | 画面が狭いときに上下並びで見る |
+| `git pdiff ...` / `git pshow ...` | delta を使わず、通常の git の表示（上下並び、git 標準の色）を less で見る。`~/.gitconfig` の alias で、中身は `git -c core.pager=less diff` / `show` |
+| `git --no-pager diff ...` | pager を使わず、そのままターミナルに流す |
 
 ---
 
