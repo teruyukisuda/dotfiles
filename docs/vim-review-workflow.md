@@ -14,6 +14,7 @@ Claude Code に書かせたコードをリポジトリ単位で確認するた�
 
 同じディレクトリの `vim-review-tutorial.md` は、練習用のリポジトリを作って
 この文書の操作を最初から最後まで一度通すチュートリアル。
+この構成を整えたときの変更内容は末尾の付録にまとめてある。
 
 ---
 
@@ -33,92 +34,17 @@ vim の中では次を繰り返す。
 - タブ 1 で未ステージが残っていなければ `cc` でコミット
 
 `:qa` で抜けて `review` を再実行し、`changed` が空になるまで繰り返す。
-用語や仕組みがわからなければ 2 章、各操作の意味は 3 章、手順の詳細は 4 章にある。
+用語や仕組みがわからなければ 1 章、各操作の意味は 2 章、手順の詳細は 3 章にある。
 練習用のリポジトリで一通り試すチュートリアルは `vim-review-tutorial.md`。
 
 ---
 
-## 1. 今回やったこと
+## 1. 前提知識と段階的な覚え方
 
-### 1-1. vimrc の修正
-
-動いていなかった設定を直し、死んでいた設定を消した。596 行から 340 行になった。
-
-**バグ修正**
-
-- `sj` `sk` `so` などウィンドウ操作マップの末尾にあった `"コメント` が、マップ本体に
-  含まれていた。`:map` の右辺では `"` はコメントにならない。コメントを行の外に出した。
-  `so` は `|` で右辺が切れて `<C-w>_<C-w>` のまま次のキー待ちになっていたので、
-  `<C-w>_<C-w><Bar>` に直した。
-- `[q` が `:cprevi]us` と打ち間違っていた。`:cprevious` に修正。
-- `<Space><CR>` の右辺にも `# コメント` が混入していた。
-- `U` が存在しない `:Redo` を呼んでいた。`<C-r>` に変更。
-- `~/.vim/plugin` の symlink が張られておらず `:CopyPath` `:CopyFileName`（`,cp` `,cf`）が
-  使えなかった。`dotfilesLink.sh` と同じ symlink を張った。
-
-**レビュー用途に合わせた変更**
-
-- `set autochdir` を削除。開いたファイルの場所にカレントディレクトリが移ると、
-  fugitive / fzf / quickfix のパスが狂うため。リポジトリルートに移りたいときは `,cd`。
-- `set diffopt=vertical` は Vim 標準の値を上書きしていた。`+=` に変え、
-  `internal,filler,closeoff,algorithm:histogram,indent-heuristic` を足した。
-- `grepprg` を `rg --vimgrep` にした。`:grep` の結果が quickfix に入る。
-- `set signcolumn=yes` と `set updatetime=100` を追加。gitgutter の記号が
-  出たり消えたりして画面が横にずれるのを防ぎ、反映の遅延を 4 秒から 0.1 秒にした。
-
-**削除した設定**
-
-- vim-plug の区画。`~/.vim/plugged` が無く、ALE・vim-prettier・vimdoc-ja は
-  一度もインストールされていなかった。必要になったら dein 側に追加する。
-- NeoBundle、CtrlP、rsense、syntastic、quickrun のコメントアウト済み設定。
-- unite.vim 用のマップとオートコマンド（プラグインごと削除）。
-
-### 1-2. プラグインの入れ替え（rc/dein.toml）
-
-| 操作 | プラグイン | 用途 |
-|---|---|---|
-| 追加 | `airblade/vim-gitgutter` | ハンクの表示、プレビュー、部分ステージ、取り消し |
-| 追加 | `junegunn/fzf.vim` | `:Files` `:Buffers` `:Rg` `:GFiles?` `:Commits` `:BCommits` |
-| 追加 | `rhysd/git-messenger.vim` | カーソル行の blame をポップアップ表示 |
-| 削除 | `Shougo/unite.vim` | fzf.vim に置き換え |
-| 削除 | `rking/ag.vim` | `ag` が未インストールで動いていなかった。`:Rg` に置き換え |
-
-fzf 本体（`junegunn/fzf`）は dein ではなく Homebrew 版を使う。
-`.vimrc` で `/opt/homebrew/opt/fzf` を runtimepath に足している。
-fzf.vim は本体のバージョンと揃っている必要があり、brew で入れた実行ファイルと
-同梱の vim プラグインを使えばずれない。
-
-`tpope/vim-fugitive` は元から入っていたが、toml 内で Git レビュー用の区画に移した。
-
-### 1-3. ターミナル側
-
-- `brew install fzf git-delta` を実行した。
-- `~/.gitconfig` に以下を追加した。既存の alias は変更していない。
-
-```
-[core]
-    pager = delta
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-    navigate = true
-    side-by-side = true
-    line-numbers = true
-[diff]
-    colorMoved = default
-```
-
-- `.bashrc` の末尾に fzf の初期化（`Ctrl-R` 履歴検索、`Ctrl-T` ファイル選択、
-  `Alt-C` ディレクトリ移動）と、レビュー用のシェル関数を追加した。
-
----
-
-## 2. 前提知識と段階的な覚え方
-
-vim のプラグインや git の用語に慣れていない人向けに、3 章以降を読むのに必要な知識と、
+vim のプラグインや git の用語に慣れていない人向けに、2 章以降を読むのに必要な知識と、
 覚える順番を書く。知っていれば飛ばしてよい。
 
-### 2-1. vim 側の用語
+### 1-1. vim 側の用語
 
 **プラグイン**
 
@@ -129,7 +55,7 @@ vim が `runtimepath` という設定を通して読む。
 
 例えば fugitive は `:Git` というコマンドとステータス画面の中のキー（`-` `cc` など）を足し、
 gitgutter は左端の記号列と `,hs` のような操作を足す。どのプラグインが何を足しているかは
-1-2 の表と、`rc/dein.toml` のコメントに書いてある。
+1-3 と、`rc/dein.toml` のコメントに書いてある。
 
 **dein**
 
@@ -193,7 +119,7 @@ repo = 'tpope/vim-fugitive'
 `:help fugitive-maps` `:help gitgutter` `:help fzf-vim` `:help git-messenger` `:help dein` で
 各プラグインの説明が読める。fugitive の画面では `g?` でその画面のキー一覧が出る。
 
-### 2-2. git 側の用語
+### 1-2. git 側の用語
 
 - **作業ツリー**: 手元のファイルそのもの。Claude Code はここを書き換える。
 - **index**（ステージ、staging area とも言う）: 次のコミットに入れる内容の置き場。
@@ -209,10 +135,85 @@ repo = 'tpope/vim-fugitive'
 | HEAD と index（ステージ済みの変更） | `git diff --cached` | ステータス画面の Staged 欄で `=` |
 | HEAD と作業ツリー（両方まとめて） | `git diff HEAD` | `,gH`、`review` |
 
-3-1 の「ステージ済み = レビュー済み」という考え方はこの区別に乗っている。
+2-1 の「ステージ済み = レビュー済み」という考え方はこの区別に乗っている。
 index に入れた変更は `,gD` と gitgutter の記号から消えるので、残っている記号が未レビュー分になる。
 
-### 2-3. 段階的に覚える
+### 1-3. 使うプラグインと画面
+
+レビューで使うのは vim のプラグイン 4 つと、ターミナル側の delta。
+ここではそれぞれが何をするもので、開くと何が出るかだけを書く。キーの一覧は 2 章にある。
+
+**vim-fugitive: git の操作とステータス画面**
+
+vim の中から git を使うためのプラグイン。`:Git` の後ろに git のサブコマンドを書くとそのまま実行できる
+（`:Git log` `:Git blame` など）。引数なしの `:Git`（`,gs`）はステータス画面を開く。
+
+ステータス画面は `git status` の結果を vim のバッファにしたもので、ファイルが欄ごとに並ぶ。
+
+```
+Head: main
+Help: g?
+
+Untracked (1)
+? test.sh
+
+Unstaged (1)
+M todo.sh
+
+Staged (1)
+M README.md
+```
+
+| 欄 | 並ぶもの |
+|---|---|
+| Untracked | git がまだ追跡していない新規ファイル（行頭 `?`） |
+| Unstaged | 作業ツリーで変わっていて、まだ index に入れていないファイル（`M` は変更、`D` は削除） |
+| Staged | index に入れたファイル（`A` は新規追加） |
+| Unpushed / Unpulled | まだ push / pull していないコミット |
+
+該当するものがない欄は表示されない。レビューは、ファイルを Untracked と Unstaged から Staged へ移していく作業になる。
+ファイル名の行で `=` を押すとその場に差分が展開され、`-` を押すと欄を移る。
+
+左右差分のタブ（`,gD` `,gH` `review`）、blame 画面（`,gb`）、ログ画面（`,gl`）も fugitive が作る。
+
+**vim-gitgutter: 変更行の記号とハンク操作**
+
+開いているファイルを index と比べ、変わった行の左端の列（サインカラム）に記号を出す。
+
+| 記号 | 意味 |
+|---|---|
+| `+` | 追加された行 |
+| `~` | 変更された行 |
+| `_` | この行の下で行が削除された |
+| `‾` | ファイルの先頭で行が削除された（1 行目に出る） |
+| `~_` | 変更されていて、かつこの行の下で行が削除された |
+
+記号がひとつながりになっている範囲が 1 ハンクで、`,hs` `,hu` `,hp` はカーソルのあるハンクに効く。
+比較相手は index なので、`,hs` でステージした行からは記号が消える。記号が残っている行がまだ見ていない変更になる。
+
+**fzf.vim: 絞り込み検索**
+
+fzf はターミナルで動く絞り込みツールで、候補の一覧に対して文字を打つと、あいまい一致で候補が減っていく。
+fzf.vim は、ファイル名・バッファ・`rg` の検索結果・コミットなどを fzf の候補にして vim から使うためのコマンド群
+（`:Files` `:Rg` `:GFiles?` `:Commits` など）。
+
+この環境では、fzf の画面は vim の下 40% に出る。いちばん上が入力欄、その下に候補が並び、
+右半分にカーソルのある候補のプレビュー（ファイルの中身や差分）が出る。`Ctrl-J` `Ctrl-K` で候補を上下に動き、
+`Enter` で開く。何も開かずに閉じるのは `Esc`。
+
+**git-messenger: カーソル行のコミットを見る**
+
+`,gm` を押すと、カーソル行を最後に変更したコミットのハッシュ・作者・日時・コミットメッセージが
+カーソルの近くの小窓（ポップアップ）に出る。blame 画面を開くほどではなく、1 行だけ「誰がなぜ書いたか」を
+知りたいときに使う。`q` で閉じる。
+
+**delta: ターミナルの差分表示**
+
+vim のプラグインではなく、`git diff` `git show` `git log -p` の出力を整形するターミナル側のツール。
+git の pager に設定してあるので、これらのコマンドを打つと自動で使われる。
+左右並び・行番号付き・シンタックス色付きで表示され、`n` `N` でファイル間を移動できる。
+
+### 1-4. 段階的に覚える
 
 一度に全部覚える必要はない。次の順で、各段階が手に馴染んでから次へ進む。
 
@@ -253,15 +254,15 @@ index に入れた変更は `,gD` と gitgutter の記号から消えるので�
 覚えるコマンド: `changed` `review` `cw`
 
 ターミナル側のヘルパーで、変更のあるリポジトリを一覧し、選んで vim を開き、
-tmux に Claude Code 用の作業ウィンドウを作る。4 章で扱う。
+tmux に Claude Code 用の作業ウィンドウを作る。3 章で扱う。
 
 Step 1 から 3 と Step 5 を実際に通す練習が `vim-review-tutorial.md`。
 
 ---
 
-## 3. レビューの手法と操作
+## 2. レビューの手法と操作
 
-### 3-1. 考え方
+### 2-1. 考え方
 
 Claude Code が書いた変更は、コミットする前に次の 3 つに仕分ける。
 
@@ -272,7 +273,7 @@ Claude Code が書いた変更は、コミットする前に次の 3 つに仕�
 ステージ済みかどうかが「レビュー済みかどうか」の印になる。
 未ステージの変更がなくなったらそのリポジトリのレビューは終わり。
 
-### 3-2. vim のキー
+### 2-2. vim のキー
 
 Leader は `,`。
 
@@ -353,7 +354,7 @@ Vim 標準の diff モードのキーが使える。
 fzf の画面では `Enter` で現在のウィンドウ、`Ctrl-T` でタブ、`Ctrl-X` で横分割、
 `Ctrl-V` で縦分割に開く。`Ctrl-/` でプレビューの表示切り替え。
 
-### 3-3. ターミナルのコマンド
+### 2-3. ターミナルのコマンド
 
 delta を pager にしたので、`git diff` `git show` `git log -p` の出力が
 左右並び・行番号付き・シンタックス色付きになる。
@@ -365,9 +366,9 @@ delta を pager にしたので、`git diff` `git show` `git log -p` の出力�
 | `git add -p` | 対話的な部分ステージ。delta が色付けする |
 | `tig status` / `tig` | 既存の `.tigrc` のまま。履歴をたどるときに使う |
 
-### 3-4. プラグイン別の使い方
+### 2-4. プラグイン別の使い方
 
-3-2 に出てこない、各プラグインの画面の中でのキーをまとめる。
+2-2 に出てこない、各プラグインの画面の中でのキーをまとめる。
 いずれも対象の画面で `g?` を押すとプラグイン側のヘルプが出る（git-messenger は `?`）。
 
 **fugitive の blame 画面（`,gb`）**
@@ -418,7 +419,7 @@ delta を pager にしたので、`git diff` `git show` `git log -p` の出力�
 
 **fzf.vim の画面の中**
 
-fzf.vim のコマンドはどれも同じ画面で動く。3-2 に書いた `Enter` `Ctrl-T` `Ctrl-X` `Ctrl-V` `Ctrl-/` に加えて次が使える。
+fzf.vim のコマンドはどれも同じ画面で動く。2-2 に書いた `Enter` `Ctrl-T` `Ctrl-X` `Ctrl-V` `Ctrl-/` に加えて次が使える。
 
 | キー | 動作 |
 |---|---|
@@ -442,9 +443,9 @@ fzf.vim のコマンドはどれも同じ画面で動く。3-2 に書いた `Ent
 
 ---
 
-## 4. Claude Code と組み合わせた運用
+## 3. Claude Code と組み合わせた運用
 
-### 4-1. シェル関数
+### 3-1. シェル関数
 
 `.bashrc` 末尾に定義。探索先の既定値は `~/project/iso` 直下と `~/project/iso/worktrees` 直下。
 環境変数 `REVIEW_ROOT` で変えられる。引数でも指定できる。
@@ -460,7 +461,7 @@ fzf.vim のコマンドはどれも同じ画面で動く。3-2 に書いた `Ent
 - タブ 1: `:Git` のステータス画面（untracked ファイルもここに出る）
 - タブ 2 以降: HEAD と差分のあるファイルが 1 ファイル 1 タブで左右比較
 
-### 4-2. 1 リポジトリの流れ
+### 3-2. 1 リポジトリの流れ
 
 1. `cw ~/project/iso/<repo>` で作業ウィンドウを作る。右ペインの Claude Code に実装させる。
 2. 実装が終わったら Claude に `git diff --stat` と `git status --short` を出させて変更範囲を把握する。
@@ -474,18 +475,18 @@ fzf.vim のコマンドはどれも同じ画面で動く。3-2 に書いた `Ent
 7. ステータス画面で未ステージが残っていないことを確認し、`cc` でコミットする。
    Claude にコミットさせる場合は、ステージ済みの内容だけをコミットするよう伝える。
 
-### 4-3. 複数リポジトリの流れ
+### 3-3. 複数リポジトリの流れ
 
 1. Claude Code に複数リポジトリへ変更を入れさせる。
 2. ターミナルで `changed` を実行し、どのリポジトリに変更が入ったかを確認する。
 3. `review` で 1 つ選ぶと、差分タブとステータス画面が開いた状態で vim が起動する。
-   4-2 の手順 4 から 7 を行う（手順 3 は `review` が済ませている）。
+   3-2 の手順 4 から 7 を行う（手順 3 は `review` が済ませている）。
 4. `:qa` で vim を抜け、`review` を再度実行して次のリポジトリへ。
 5. `changed` の出力が空になったら全リポジトリのレビューが終わり。
    コミット済みでも untracked ファイルが残っていると `changed` に出続けるので、
    不要な生成物は削除するか `.gitignore` に入れる。
 
-### 4-4. 注意点
+### 3-4. 注意点
 
 - `X`（fugitive）と `,hu`（gitgutter）はワークツリーの変更を破棄する。元に戻せないので、
   迷う場合は `,hp` でプレビューしてから判断する。
@@ -510,7 +511,7 @@ fzf.vim のコマンドはどれも同じ画面で動く。3-2 に書いた `Ent
 
 ---
 
-## 5. 設定を反映する手順
+## 4. 設定を反映する手順
 
 新しい環境や、設定を変えた後に行う。
 
@@ -528,3 +529,81 @@ source ~/dotfiles/.bashrc
 ```
 
 brew で入れたものは `fzf` と `git-delta`。`rg` と `tig` は以前から入っている。
+
+---
+
+## 付録. 2026-10-14 の変更内容
+
+この構成を整えたときに `.vimrc` `rc/dein.toml` とターミナル側へ加えた変更の記録。
+使い方を知るだけなら読まなくてよい。
+
+### 付録-1. vimrc の修正
+
+動いていなかった設定を直し、死んでいた設定を消した。596 行から 340 行になった。
+
+**バグ修正**
+
+- `sj` `sk` `so` などウィンドウ操作マップの末尾にあった `"コメント` が、マップ本体に
+  含まれていた。`:map` の右辺では `"` はコメントにならない。コメントを行の外に出した。
+  `so` は `|` で右辺が切れて `<C-w>_<C-w>` のまま次のキー待ちになっていたので、
+  `<C-w>_<C-w><Bar>` に直した。
+- `[q` が `:cprevi]us` と打ち間違っていた。`:cprevious` に修正。
+- `<Space><CR>` の右辺にも `# コメント` が混入していた。
+- `U` が存在しない `:Redo` を呼んでいた。`<C-r>` に変更。
+- `~/.vim/plugin` の symlink が張られておらず `:CopyPath` `:CopyFileName`（`,cp` `,cf`）が
+  使えなかった。`dotfilesLink.sh` と同じ symlink を張った。
+
+**レビュー用途に合わせた変更**
+
+- `set autochdir` を削除。開いたファイルの場所にカレントディレクトリが移ると、
+  fugitive / fzf / quickfix のパスが狂うため。リポジトリルートに移りたいときは `,cd`。
+- `set diffopt=vertical` は Vim 標準の値を上書きしていた。`+=` に変え、
+  `internal,filler,closeoff,algorithm:histogram,indent-heuristic` を足した。
+- `grepprg` を `rg --vimgrep` にした。`:grep` の結果が quickfix に入る。
+- `set signcolumn=yes` と `set updatetime=100` を追加。gitgutter の記号が
+  出たり消えたりして画面が横にずれるのを防ぎ、反映の遅延を 4 秒から 0.1 秒にした。
+
+**削除した設定**
+
+- vim-plug の区画。`~/.vim/plugged` が無く、ALE・vim-prettier・vimdoc-ja は
+  一度もインストールされていなかった。必要になったら dein 側に追加する。
+- NeoBundle、CtrlP、rsense、syntastic、quickrun のコメントアウト済み設定。
+- unite.vim 用のマップとオートコマンド（プラグインごと削除）。
+
+### 付録-2. プラグインの入れ替え（rc/dein.toml）
+
+| 操作 | プラグイン | 用途 |
+|---|---|---|
+| 追加 | `airblade/vim-gitgutter` | ハンクの表示、プレビュー、部分ステージ、取り消し |
+| 追加 | `junegunn/fzf.vim` | `:Files` `:Buffers` `:Rg` `:GFiles?` `:Commits` `:BCommits` |
+| 追加 | `rhysd/git-messenger.vim` | カーソル行の blame をポップアップ表示 |
+| 削除 | `Shougo/unite.vim` | fzf.vim に置き換え |
+| 削除 | `rking/ag.vim` | `ag` が未インストールで動いていなかった。`:Rg` に置き換え |
+
+fzf 本体（`junegunn/fzf`）は dein ではなく Homebrew 版を使う。
+`.vimrc` で `/opt/homebrew/opt/fzf` を runtimepath に足している。
+fzf.vim は本体のバージョンと揃っている必要があり、brew で入れた実行ファイルと
+同梱の vim プラグインを使えばずれない。
+
+`tpope/vim-fugitive` は元から入っていたが、toml 内で Git レビュー用の区画に移した。
+
+### 付録-3. ターミナル側
+
+- `brew install fzf git-delta` を実行した。
+- `~/.gitconfig` に以下を追加した。既存の alias は変更していない。
+
+```
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+[diff]
+    colorMoved = default
+```
+
+- `.bashrc` の末尾に fzf の初期化（`Ctrl-R` 履歴検索、`Ctrl-T` ファイル選択、
+  `Alt-C` ディレクトリ移動）と、レビュー用のシェル関数を追加した。
