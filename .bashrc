@@ -1,6 +1,5 @@
 # Fig pre block. Keep at the top of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.pre.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.pre.bash"
-echo "read bashrc"
 alias cl='clear'
 alias doc='cd ~/Documents'
 alias pathc='pwd | pbcopy'
@@ -24,11 +23,6 @@ alias ll='ls -lFa'
 #[ -f $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion ] && . $(/opt/homebrew/bin/brew --prefix)/etc/bash_completion
 [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
-
-#PosgreSql環境変数PGDATAの設定
-export PGDATA=/var/lib/p2netex/postgresql/p2net/data
-export CATALINA_HOME=/Applications/apache-tomcat-8.5.34
-export CATALINA_BASE=/Applications/apache-tomcat-8.5.34
 
 # PATH設定を一度だけ構築（重複を避ける）
 # # 基本的なシステムパス
@@ -57,20 +51,7 @@ PATH="/opt/homebrew/opt/gawk/libexec/gnubin:$PATH"
 eval "$(fnm env --use-on-cd)"
 
 # その他のツール
-PATH="/Applications/Wireshark.app/Contents/MacOS:$PATH"
-PATH="/Users/tsuda/p2netex-traversal-console/bin:$PATH"
-PATH="/Users/tsuda/p2netex-builder/bin:$PATH"
-PATH="$HOME/.nodebrew/current/bin:$PATH"
-PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
-PATH="/Users/tsuda/temp/module/p2netex-thumbnail-generator/bin:$PATH"
-PATH="/Users/tsuda/project/p2net/p2netex-application/bin:$PATH"
-PATH="/Users/teruyukisuda/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
-PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
-
-# X11とDocker
-PATH="/opt/X11/bin:$PATH"
 PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"
-PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 PATH="$HOME/.claude/local:$PATH"
 
 export PATH
@@ -177,8 +158,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Fig post block. Keep at the bottom of this file.
 #[[ -f "$HOME/.fig/shell/bashrc.post.bash" ]] && builtin source "$HOME/.fig/shell/bashrc.post.bash"
-export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
-export PATH="$PATH:/opt/homebrew/opt/postgresql@15/bin"
 
 # gh command completion
 eval "$(gh completion -s bash)"
