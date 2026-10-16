@@ -1,7 +1,4 @@
 [[plugins]]
-repo = 'Shougo/neocomplete.vim'
-
-[[plugins]]
 repo = 'terryma/vim-multiple-cursors'
 
 [[plugins]]
@@ -29,7 +26,7 @@ repo = 'previm/previm'
 repo = 'tyru/open-browser.vim'
 
 # --- Git レビュー用 ---------------------------------------------------------
-# :Git / :Gvdiffsplit / :Git difftool -y / :Git blame (.vimrc の :Review もこれを使う)
+# :Git / :Gvdiffsplit / :Git difftool -y / :Git blame (autoload/review.vim の :Review もこれを使う)
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 

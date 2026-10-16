@@ -6,13 +6,14 @@ IDE を使わず、vim / tmux / bash だけで変更を読むための設定と�
 - **未コミットの変更**: Claude Code に書かせて、まだコミットしていないもの
 - **コミット済みの変更**: Claude Code がコミットまで済ませたもの、日常のコミット、特定のコミットとコミットの間
 
-前者は fugitive のステータス画面で、後者は `.vimrc` に定義した `:Review` で見る。
+前者は fugitive のステータス画面で、後者は `autoload/review.vim` に実装した `:Review` で見る。
 
 対象ファイルはすべて `~/dotfiles` にある。
 
 | ファイル | 役割 |
 |---|---|
-| `.vimrc` | vim 本体の設定。「Git レビュー」節にレビュー用のキーと `:Review` コマンドがある |
+| `.vimrc` | vim 本体の設定。「Git レビュー」節にレビュー用のキーがある |
+| `plugin/review.vim` / `autoload/review.vim` | `:Review` コマンドの定義と実装、`,gq` で呼ぶ関数 |
 | `rc/dein.toml` | dein で管理するプラグイン一覧 |
 | `.bashrc` | 末尾に fzf の初期化と `changed` / `review` / `cw` 関数 |
 | `~/.gitconfig` | delta を git の pager にする設定（dotfiles 管理外） |
