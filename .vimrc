@@ -246,6 +246,10 @@ autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 " -----------------------------------------------------------------------------
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+" :Rg で .vimrc などの . 始まりのファイルも検索する (fzf.vim は同名コマンドがあれば自分の定義を使わない)
+command! -bang -nargs=* Rg call fzf#vim#grep(
+      \ "rg --column --line-number --no-heading --color=always --smart-case --hidden --glob '!.git' -- " . fzf#shellescape(<q-args>),
+      \ fzf#vim#with_preview(), <bang>0)
 
 nnoremap <silent> <Leader>uf :Files<CR>
 nnoremap <silent> <Leader>ub :Buffers<CR>
@@ -255,18 +259,25 @@ nnoremap <silent> <Leader>r  :Rg<CR>
 " カーソル下の単語で Rg
 nnoremap <silent> <Leader>R  :Rg <C-r><C-w><CR>
 
+" よく使うものは <Space> で 2 ストローク (<Space>h <Space>l <Space><CR> は上で使用中)
+nnoremap <silent> <Space>f :Files<CR>
+nnoremap <silent> <Space>a :GFiles<CR>
+nnoremap <silent> <Space>m :History<CR>
+nnoremap <silent> <Space>r :Rg<CR>
+nnoremap <silent> <Space>R :Rg <C-r><C-w><CR>
+
 " -----------------------------------------------------------------------------
 " Git レビュー (fugitive + fzf.vim)
 " -----------------------------------------------------------------------------
 " 使い方の要点
-"   ,gs  : ステータス画面。= でインライン差分、差分のハンク上で - でステージ / X で取り消し、dv で左右差分、cc でコミット
-"   ,gr  : :Review {範囲}。1 つ目のタブに範囲内のコミットと変更ファイルの一覧、2 つ目以降にファイルごとの左右差分
-"          (一覧のファイル行で Enter でそのタブへ、コミット行で Enter でコミットを開く)
-"   ,gd  : 現在のファイルだけ左右差分
-"   ,gl  : コミットログ   ,gb: blame
-"   ,gq  : レビュー用に開いたタブと fugitive の画面を閉じ、普通のファイルのウィンドウを 1 つだけ残す
-"   ,gf  : 変更ファイルを fzf で選んで開く   ,gc: このファイルのコミット履歴   ,gC: リポジトリのコミット履歴
-" :Review と ,gq の実装は autoload/review.vim (コマンド定義は plugin/review.vim)
+"   <Space>s : ステータス画面。= でインライン差分、差分のハンク上で - でステージ / X で取り消し、dv で左右差分、cc でコミット
+"   ,gr      : :Review {範囲}。1 つ目のタブに範囲内のコミットと変更ファイルの一覧、2 つ目以降にファイルごとの左右差分
+"              (一覧のファイル行で Enter でそのタブへ、コミット行で Enter でコミットを開く)
+"   <Space>d : 現在のファイルだけ左右差分
+"   ,gl      : コミットログ   ,gb: blame
+"   <Space>q : レビュー用に開いたタブと fugitive の画面を閉じ、普通のファイルのウィンドウを 1 つだけ残す
+"   <Space>e : 変更ファイルを fzf で選んで開く   <Space>c: このファイルのコミット履歴   ,gC: リポジトリのコミット履歴
+" :Review と <Space>q の実装は autoload/review.vim (コマンド定義は plugin/review.vim)
 
 " fugitive
 nnoremap <silent> <Leader>gs :Git<CR>
@@ -280,6 +291,13 @@ nnoremap <silent> <Leader>gq :call review#close()<CR>
 nnoremap <silent> <Leader>gf :GFiles?<CR>
 nnoremap <silent> <Leader>gc :BCommits<CR>
 nnoremap <silent> <Leader>gC :Commits<CR>
+
+" よく使うものは <Space> で 2 ストローク
+nnoremap <silent> <Space>s :Git<CR>
+nnoremap <silent> <Space>d :Gvdiffsplit<CR>
+nnoremap <silent> <Space>e :GFiles?<CR>
+nnoremap <silent> <Space>c :BCommits<CR>
+nnoremap <silent> <Space>q :call review#close()<CR>
 
 " fugitive の画面と s プレフィックス / バッファ移動の衝突を解消する
 "   - ステータス画面では fugitive が s を「ステージ」に割り当てるので外す (ステージは - で行う)

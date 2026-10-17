@@ -1,5 +1,5 @@
 " =============================================================================
-" :Review と ,gq の実装 (コマンドは plugin/review.vim、キーは .vimrc の「Git レビュー」節)
+" :Review と <Space>q の実装 (コマンドは plugin/review.vim、キーは .vimrc の「Git レビュー」節)
 "   fugitive (tpope/vim-fugitive) が必要
 " =============================================================================
 
@@ -100,7 +100,7 @@ function! review#start(range) abort
   enew
   setlocal buftype=nofile bufhidden=wipe noswapfile nobuflisted
   let l:lines = ['Review: ' . a:range . (l:to_worktree ? '  (作業ツリーまで)' : ''),
-        \ 'Enter: ファイル行はそのタブへ / コミット行はコミットを開く   gt gT: タブ移動   ,gq: 全部閉じる', '']
+        \ 'Enter: ファイル行はそのタブへ / コミット行はコミットを開く   gt gT: タブ移動   <Space>q: 全部閉じる', '']
   let l:commit_lines = {}
   let l:file_lines = {}
   call add(l:lines, 'Commits (' . len(l:commits) . ')')
