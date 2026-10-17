@@ -246,6 +246,10 @@ autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 " -----------------------------------------------------------------------------
 let g:fzf_layout = { 'down': '40%' }
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+" fzf の画面でも Ctrl-j で閉じる (vim の他の場所の <C-j> = <Esc> に合わせる。下移動は Ctrl-n)
+if $FZF_DEFAULT_OPTS !~# 'ctrl-j:abort'
+  let $FZF_DEFAULT_OPTS .= ' --bind ctrl-j:abort'
+endif
 " :Rg で .vimrc などの . 始まりのファイルも検索する (fzf.vim は同名コマンドがあれば自分の定義を使わない)
 command! -bang -nargs=* Rg call fzf#vim#grep(
       \ "rg --column --line-number --no-heading --color=always --smart-case --hidden --glob '!.git' -- " . fzf#shellescape(<q-args>),
